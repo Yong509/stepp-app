@@ -4,8 +4,9 @@ import 'package:stepp_app/styles/app_theme.dart';
 
 class CustomOpacityTile extends StatelessWidget {
   final Widget title;
+  final Widget? leading;
   final Widget? subTitle;
-  const CustomOpacityTile({super.key, required this.title, this.subTitle});
+  const CustomOpacityTile({super.key, required this.title, this.subTitle, this.leading});
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +16,7 @@ class CustomOpacityTile extends StatelessWidget {
         contentPadding: CustomOpacityTileSize.tilePadding,
         dense: true,
         horizontalTitleGap: CustomOpacityTileSize.tileLeadingTitleSpacing,
-        leading: const Icon(
-          Icons.place_outlined,
-          color: Colors.white,
-        ),
+        leading: leading,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
             CustomOpacityTileSize.detailTileBorderRaidusSize,
