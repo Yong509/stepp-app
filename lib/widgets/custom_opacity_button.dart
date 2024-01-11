@@ -7,14 +7,15 @@ import '../styles/app_theme.dart';
 class CustomOpacityButton extends StatelessWidget {
   final VoidCallback? onTap;
   final Widget child;
-  const CustomOpacityButton({super.key, this.onTap, required this.child});
+  final EdgeInsets? padding;
+  const CustomOpacityButton({super.key, this.onTap, required this.child, this.padding = CustomOpacityButtonSize.buttonPadding});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: CustomOpacityButtonSize.buttonPadding,
+        padding: padding,
         decoration: BoxDecoration(
           color: AppTheme.black900.withOpacity(AppTheme.opacity80Percent),
           borderRadius: BorderRadius.circular(

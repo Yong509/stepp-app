@@ -9,5 +9,19 @@ class SteppPlaceSize {
   static const steppPlaceSaveIconTitleButtonSize = 10.0;
   static const steppPlaceNameTitleTileMaxLines = 1;
   static const steppPlaceContentTitlePadding = EdgeInsets.only(right: 0);
-  static const steppPlaceContentPadding = EdgeInsets.symmetric(horizontal: 50);
+  static const steppPlaceContentPadding = EdgeInsets.symmetric(horizontal: 12);
+  static const steppPlaceTileDescriptionSpace = 10.0;
+  static const steppPlaceContentProfileRadius = 24.0;
+  static const steppPlaceFollowButtonPadding = EdgeInsets.symmetric(vertical: 7,horizontal: 10);
+  static const steppPlaceLikeIconSize = 40.0;
+  static const steppPlacePanelSteppButtonIconSize = 16.0;
+  static const steppPlaceDescriptionMaxLines = 2;
+  static const steppPlaceSteppButtonPadding = EdgeInsets.symmetric(vertical: 12, horizontal: 8);
+
+  //Stepp display box
+  static const steppPlaceDisplayBoxSteppImageSize = 65.0;
+  static const steppPlaceDisplayBoxSteppImagePadding = EdgeInsets.symmetric(vertical: 10, horizontal: 4);
+  static const steppPlaceDisplayBoxSteppProfileRightPosition = 0.0;
+  static const steppPlaceDisplayBoxSteppProfileBottomPosition = 0.0;
+  static const steppPlaceDisplayBoxSteppProfileImageSize = 18.0;
 }
