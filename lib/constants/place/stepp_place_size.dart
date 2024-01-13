@@ -12,7 +12,7 @@ class SteppPlaceSize {
   static const steppPlaceContentPadding = EdgeInsets.symmetric(horizontal: 12);
   static const steppPlaceTileDescriptionSpace = 10.0;
   static const steppPlaceContentProfileRadius = 24.0;
-  static const steppPlaceFollowButtonPadding = EdgeInsets.symmetric(vertical: 7,horizontal: 10);
+  static const steppPlaceFollowButtonPadding = EdgeInsets.symmetric(vertical: 7,horizontal: 13);
   static const steppPlaceLikeIconSize = 40.0;
   static const steppPlacePanelSteppButtonIconSize = 16.0;
   static const steppPlaceDescriptionMaxLines = 2;
