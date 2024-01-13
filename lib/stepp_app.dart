@@ -1,39 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:stepp_app/pages/place/stepp_place.dart';
+import 'package:stepp_app/styles/app_theme.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class SteppApp extends StatelessWidget {
+  const SteppApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        textTheme: AppTheme.customTextTheme
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const SteppPlace(),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-        body: Column(
-      children: [
-        Expanded(child: SteppPlace()),
-      ],
-    ));
   }
 }
