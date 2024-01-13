@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  static const googleFontFamiliy = 'Inter';
+  static const googleFontFamily = 'Inter';
   // Alpha values
   static const alpha4Percent = 10;
   static const alpha8Percent = 20;
@@ -21,7 +21,7 @@ class AppTheme {
 
   static TextTheme customTextTheme = TextTheme(
     bodyMedium: GoogleFonts.getFont(
-      googleFontFamiliy,
+      googleFontFamily,
       fontSize: 15,
     ),
   );
