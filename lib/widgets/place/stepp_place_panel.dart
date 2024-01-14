@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stepp_app/constants/place/stepp_place_size.dart';
 import 'package:stepp_app/constants/place/stepp_place_ui_strings.dart';
 import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
+import 'package:stepp_app/providers/stepp_place_provider.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/custom_opacity_button.dart';
 import 'package:stepp_app/widgets/place/stepp_place_display_box.dart';
@@ -18,13 +20,14 @@ class _SteppPlacePanelState extends State<SteppPlacePanel> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: context.watch<SteppPlaceProvider>().isPanelOpen
+          ? MainAxisAlignment.start
+          : MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Flexible(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
                 onPressed: () {},

@@ -13,8 +13,24 @@ class _ImageViewerState extends State<ImageViewer> {
   Widget build(BuildContext context) {
     return Hero(
       tag: "",
-      child: EasyImageView(
-        imageProvider: const AssetImage("assets/images/thumbnail.jpg"),
+      child: Stack(
+        children: [
+          EasyImageView(
+            imageProvider: const AssetImage("assets/images/thumbnail.jpg"),
+          ),
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: FractionalOffset.center,
+                end: FractionalOffset.bottomCenter,
+                colors: [
+                  Colors.transparent,
+                  Colors.black,
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
