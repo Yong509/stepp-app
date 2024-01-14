@@ -1,19 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:stepp_app/pages/place/stepp_place.dart';
+import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
+import 'package:stepp_app/pages/place/stepp_place_page.dart';
+import 'package:stepp_app/providers/stepp_place_provider.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 
-class SteppApp extends StatelessWidget {
+class SteppApp extends StatefulWidget {
   const SteppApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        useMaterial3: true,
-        textTheme: AppTheme.customTextTheme
+  State<SteppApp> createState() => _SteppAppState();
+}
+
+class _SteppAppState extends State<SteppApp> {
+  List<SingleChildWidget> _initializeServices() {
+    return [
+      ChangeNotifierProvider(
+        create: (context) => SteppPlaceProvider(),
       ),
-      home: const SteppPlace(),
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final providers = _initializeServices();
+    return MultiProvider(
+      providers: providers,
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          useMaterial3: true,
+          textTheme: AppTheme.customTextTheme,
+        ),
+        home: const SteppPlace(),
+      ),
     );
   }
 }

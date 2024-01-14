@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stepp_app/constants/place/stepp_place_size.dart';
 import 'package:stepp_app/constants/place/stepp_place_ui_strings.dart';
 import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
+import 'package:stepp_app/providers/stepp_place_provider.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/custom_opacity_button.dart';
 
@@ -13,7 +15,9 @@ class ProfileAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: context.watch<SteppPlaceProvider>().isPanelOpen
+          ? MainAxisAlignment.start
+          : MainAxisAlignment.end,
       children: [
         const Flexible(
           child: CircleAvatar(
