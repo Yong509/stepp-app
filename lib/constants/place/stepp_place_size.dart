@@ -17,6 +17,12 @@ class SteppPlaceSize {
   static const steppPlacePanelSteppButtonIconSize = 16.0;
   static const steppPlaceDescriptionMaxLines = 2;
   static const steppPlaceSteppButtonPadding = EdgeInsets.symmetric(vertical: 12, horizontal: 8);
+  static const steppPlaceContentBottomPadding = EdgeInsets.only(bottom: 15.0);
+  static const steppPlaceInitialPage = 0;
+  static const steppPlaceViewPortFraction = 1.0;
+  static const linearIndicatorMinHeight = 2.0;
+  static const tweenLinearAnimDuration = 1;
+  static const tweenBegin = 0.0;
 
   //Stepp display box
   static const steppPlaceDisplayBoxSteppImageSize = 65.0;

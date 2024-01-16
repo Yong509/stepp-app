@@ -2,7 +2,8 @@ import 'package:easy_image_viewer/easy_image_viewer.dart';
 import 'package:flutter/material.dart';
 
 class ImageViewer extends StatefulWidget {
-  const ImageViewer({super.key});
+  final String imagePath;
+  const ImageViewer({super.key, required this.imagePath});
 
   @override
   State<ImageViewer> createState() => _ImageViewerState();
@@ -16,7 +17,7 @@ class _ImageViewerState extends State<ImageViewer> {
       child: Stack(
         children: [
           EasyImageView(
-            imageProvider: const AssetImage("assets/images/thumbnail.jpg"),
+            imageProvider: AssetImage(widget.imagePath),
           ),
           Container(
             decoration: const BoxDecoration(
