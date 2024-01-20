@@ -91,19 +91,21 @@ class _SteppPlaceWidgetState extends State<SteppPlaceWidget>
         return SlidingSteppPlacePanel(
           controller: steppPlaceProvider.slidingPanelController,
           openPanel: steppPlaceProvider.isPanelOpen,
+          isOpen: (isOpen) {
+            isOpen ? animateController.stop() : animateController.forward();
+          },
           body: Stack(
             children: [
               PageView.builder(
                 controller: pageController,
                 itemBuilder: (context, index) {
-                  return ImageViewer(
-                    imagePath: mockData[index % mockData.length].imagePath,
+                  return GestureDetector(
+                    onLongPressDown: (details) => animateController.stop(),
+                    onLongPressUp: () => animateController.forward(),
+                    child: ImageViewer(
+                      imagePath: mockData[index % mockData.length].imagePath,
+                    ),
                   );
-                },
-                onPageChanged: (value) {
-                  setState(() {
-                    currentPage = value % mockData.length;
-                  });
                 },
               ),
               SafeArea(
@@ -115,9 +117,9 @@ class _SteppPlaceWidgetState extends State<SteppPlaceWidget>
                     steppPlaceProvider.isPanelOpen
                         ? const SizedBox()
                         : SteppPlaceContent(
-                            isOnOpenComment: (isOpen) {
-                              if (isOpen) {
-                                steppPlaceProvider.setIsPanelOpen(isOpen);
+                            isOnTapComment: (isTap) {
+                              if (isTap) {
+                                steppPlaceProvider.setIsPanelOpen(isTap);
                                 steppPlaceProvider.slidingPanelController
                                     .animatePanelToPosition(
                                   SteppPlaceSize
@@ -128,7 +130,7 @@ class _SteppPlaceWidgetState extends State<SteppPlaceWidget>
                           ),
                   ],
                 ),
-              ),
+              ), 
               Positioned(
                 bottom: 30.0,
                 child: SizedBox(

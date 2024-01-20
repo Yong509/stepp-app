@@ -12,8 +12,8 @@ import 'package:stepp_app/widgets/place/profile_avatar.dart';
 import 'package:stepp_app/widgets/place/stepp_place_panel.dart';
 
 class SteppPlaceContent extends StatefulWidget {
-  final Function(bool)? isOnOpenComment;
-  const SteppPlaceContent({super.key, this.isOnOpenComment});
+  final Function(bool)? isOnTapComment;
+  const SteppPlaceContent({super.key, this.isOnTapComment});
 
   @override
   State<SteppPlaceContent> createState() => _SteppPlaceContentState();
@@ -105,7 +105,7 @@ class _SteppPlaceContentState extends State<SteppPlaceContent> {
                           ),
                           Center(
                             child: GestureDetector(
-                              onTap: () => widget.isOnOpenComment!(
+                              onTap: () => widget.isOnTapComment!(
                                 _triggerOpenComment(),
                               ),
                               child: IntrinsicWidth(

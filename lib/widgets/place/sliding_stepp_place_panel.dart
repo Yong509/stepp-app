@@ -11,12 +11,13 @@ class SlidingSteppPlacePanel extends StatefulWidget {
   final bool? openPanel;
   final Widget? body;
   final PanelController controller;
-  const SlidingSteppPlacePanel({
-    super.key,
-    this.openPanel = false,
-    this.body,
-    required this.controller,
-  });
+  final Function(bool) isOpen;
+  const SlidingSteppPlacePanel(
+      {super.key,
+      this.openPanel = false,
+      this.body,
+      required this.controller,
+      required this.isOpen});
 
   @override
   State<SlidingSteppPlacePanel> createState() => _SlidingSteppPlacePanelState();
@@ -38,9 +39,13 @@ class _SlidingSteppPlacePanelState extends State<SlidingSteppPlacePanel> {
       body: widget.body,
       isDraggable: true,
       onPanelSlide: (position) {
-        position == 0.0
-            ? context.read<SteppPlaceProvider>().setIsPanelOpen(false)
-            : context.read<SteppPlaceProvider>().setIsPanelOpen(true);
+        if (position == 0.0) {
+          context.read<SteppPlaceProvider>().setIsPanelOpen(false);
+          widget.isOpen(false);
+        } else {
+          context.read<SteppPlaceProvider>().setIsPanelOpen(true);
+          widget.isOpen(false);
+        }
       },
       panelBuilder: (sc) {
         return const Padding(
