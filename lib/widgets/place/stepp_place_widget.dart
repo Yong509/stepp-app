@@ -42,8 +42,8 @@ class _SteppPlaceWidgetState extends State<SteppPlaceWidget>
       end: SteppPlaceSize.tweenEnd,
     ).animate(animateController);
 
-    // animateController.forward();
-    // animationController();
+    animateController.forward();
+    animationController();
   }
 
   void animationController() {
