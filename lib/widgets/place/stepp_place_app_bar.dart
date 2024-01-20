@@ -17,66 +17,69 @@ class SteppPlaceAppBar extends StatefulWidget {
 class _SteppPlaceAppBarState extends State<SteppPlaceAppBar> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Flexible(
-          child: IntrinsicWidth(
-            child: CustomOpacityTile(
-              leading: const Icon(
-                Icons.place,
-                color: Colors.white,
-              ),
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    SteppPlaceUIStrings.steppPlaceBucketList,
-                    maxLines: SteppPlaceSize.steppPlaceNameTitleTileMaxLines,
-                    overflow: TextOverflow.ellipsis,
-                    style: context.textTheme.bodyLarge!.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700
+    return Padding(
+      padding: SteppPlaceSize.steppPlaceAppBarPadding,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Flexible(
+            child: IntrinsicWidth(
+              child: CustomOpacityTile(
+                leading: const Icon(
+                  Icons.place,
+                  color: Colors.white,
+                ),
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      SteppPlaceUIStrings.steppPlaceBucketList,
+                      maxLines: SteppPlaceSize.steppPlaceNameTitleTileMaxLines,
+                      overflow: TextOverflow.ellipsis,
+                      style: context.textTheme.bodyLarge!.copyWith(
+                          color: Colors.white, fontWeight: FontWeight.w700),
                     ),
-                  ),
-                  Text(
-                    SteppPlaceUIStrings.steppPlaceSubTitle,
-                    style: context.textTheme.labelSmall!.copyWith(
-                      color: Colors.white.withOpacity(AppTheme.opacity80Percent),
+                    Text(
+                      SteppPlaceUIStrings.steppPlaceSubTitle,
+                      style: context.textTheme.labelSmall!.copyWith(
+                        color:
+                            Colors.white.withOpacity(AppTheme.opacity80Percent),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        SizedBox(
-          width: SteppPlaceSize.steppPlaceShareSpacing(
-            context.deviceSize.width,
+          SizedBox(
+            width: SteppPlaceSize.steppPlaceShareSpacing(
+              context.deviceSize.width,
+            ),
           ),
-        ),
-        CustomOpacityButton(
-          child: Row(
-            children: [
-              const Icon(
-                Icons.bookmark,
-                color: Colors.white,
-                size: SteppPlaceSize.steppPlaceSaveIconButtonSize,
-              ),
-              const SizedBox(
-                width: SteppPlaceSize.steppPlaceSaveIconTitleButtonSize,
-              ),
-              Text(
-                UiStrings.commonSave,
-                style: context.textTheme.bodyMedium!.copyWith(
+          CustomOpacityButton(
+            padding: SteppPlaceSize.saveButtonPadding,
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.bookmark,
                   color: Colors.white,
+                  size: SteppPlaceSize.steppPlaceSaveIconButtonSize,
                 ),
-              )
-            ],
-          ),
-        )
-      ],
+                const SizedBox(
+                  width: SteppPlaceSize.steppPlaceSaveIconTitleButtonSize,
+                ),
+                Text(
+                  UiStrings.commonSave,
+                  style: context.textTheme.bodyMedium!.copyWith(
+                    color: Colors.white,
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
