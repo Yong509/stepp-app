@@ -122,7 +122,7 @@ class _SteppPlaceContentState extends State<SteppPlaceContent> {
                                         width: SteppPlaceSize
                                             .steppPlaceSaveIconTitleButtonSize,
                                       ),
-                                      Text(
+                                       Text(
                                         UiStrings.commonComment,
                                         style: context.textTheme.bodySmall!
                                             .copyWith(color: Colors.white),

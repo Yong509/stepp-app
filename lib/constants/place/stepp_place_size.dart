@@ -21,8 +21,10 @@ class SteppPlaceSize {
   static const steppPlaceInitialPage = 0;
   static const steppPlaceViewPortFraction = 1.0;
   static const linearIndicatorMinHeight = 2.0;
-  static const tweenLinearAnimDuration = 1;
+  static const tweenEnd = 1.0;
   static const tweenBegin = 0.0;
+  static const durationPageTransition = 300;
+  static const perImageDuration = Duration(seconds: 8);
 
   //Stepp display box
   static const steppPlaceDisplayBoxSteppImageSize = 65.0;
