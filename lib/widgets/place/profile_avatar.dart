@@ -13,38 +13,59 @@ class ProfileAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: context.watch<SteppPlaceProvider>().isPanelOpen
-          ? MainAxisAlignment.start
-          : MainAxisAlignment.end,
-      children: [
-        const Flexible(
-          child: CircleAvatar(
-            backgroundImage: AssetImage('assets/images/avatar.png'),
-            radius: SteppPlaceSize.steppPlaceContentProfileRadius,
-          ),
-        ),
-        const SizedBox(
-          height: Sizes.spacing10,
-        ),
-        Text(
-          SteppPlaceUIStrings.steppPlaceMockProfileName,
-          style: context.textTheme.titleLarge!.copyWith(color: Colors.white),
-        ),
-        const SizedBox(
-          height: Sizes.spacing10,
-        ),
-        CustomOpacityButton(
-          padding: SteppPlaceSize.steppPlaceFollowButtonPadding,
-          child: Text(
-            UiStrings.commonFollow,
-            style: context.textTheme.bodyMedium!.copyWith(
-              color: Colors.white,
+    return SizedBox(
+      width: SteppPlaceSize.displayBoxWidth,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: context.watch<SteppPlaceProvider>().isPanelOpen
+                  ? MainAxisAlignment.start
+                  : MainAxisAlignment.end,
+              children: [
+                const Flexible(
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage('assets/images/avatar.png'),
+                    radius: SteppPlaceSize.steppPlaceContentProfileRadius,
+                  ),
+                ),
+                const SizedBox(
+                  height: Sizes.spacing10,
+                ),
+                Text(
+                  SteppPlaceUIStrings.steppPlaceMockProfileName,
+                  style: context.textTheme.titleLarge!
+                      .copyWith(color: Colors.white),
+                ),
+                const SizedBox(
+                  height: Sizes.spacing10,
+                ),
+                CustomOpacityButton(
+                  padding: SteppPlaceSize.steppPlaceFollowButtonPadding,
+                  child: Text(
+                    UiStrings.commonFollow,
+                    style: context.textTheme.bodyMedium!.copyWith(
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              ],
             ),
           ),
-        )
-      ],
+          context.watch<SteppPlaceProvider>().isPanelOpen
+              ? IconButton(
+                  padding: SteppPlaceSize.profileAvatarMoreHorizPadding,
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.more_horiz,
+                    color: Colors.white,
+                  ),
+                )
+              : const SizedBox()
+        ],
+      ),
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stepp_app/constants/widgets/custom_opacity_tile.dart';
+import 'package:stepp_app/constants/widgets/custom_opacity_tile_size.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 
 class CustomOpacityTile extends StatelessWidget {
