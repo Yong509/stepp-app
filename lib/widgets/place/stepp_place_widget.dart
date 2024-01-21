@@ -130,7 +130,7 @@ class _SteppPlaceWidgetState extends State<SteppPlaceWidget>
                           ),
                   ],
                 ),
-              ), 
+              ),
               Positioned(
                 bottom: 30.0,
                 child: SizedBox(

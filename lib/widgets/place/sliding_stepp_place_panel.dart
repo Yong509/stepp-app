@@ -44,7 +44,7 @@ class _SlidingSteppPlacePanelState extends State<SlidingSteppPlacePanel> {
           widget.isOpen(false);
         } else {
           context.read<SteppPlaceProvider>().setIsPanelOpen(true);
-          widget.isOpen(false);
+          widget.isOpen(true);
         }
       },
       panelBuilder: (sc) {
