@@ -27,6 +27,7 @@ class SteppPlaceSize {
   static const durationPageTransition = 300;
   static const perImageDuration = Duration(seconds: 8);
   static const saveButtonPadding = EdgeInsets.all(9);
+  static double divideHalfScreen(double deviceWidth) => deviceWidth / 2;
 
   //Stepp display box
   static const steppPlaceDisplayBoxSteppImageSize = 50.0;
