@@ -12,7 +12,8 @@ class PostBoxSize {
     horizontal: 10,
     vertical: 35,
   );
-  static double imagePostHeight(double deviceHeight) => deviceHeight * 1.75;
+  static double imagePostHeight(double deviceHeight) => deviceHeight * 0.35;
+  static double postSpacing = 25;
 
   // Stepped Profile
   static double steppProfileBottomPositioned = 10;
