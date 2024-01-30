@@ -86,20 +86,20 @@ class _SteppPlaceContentState extends State<SteppPlaceContent> {
                                 ),
                               ),
                               const SizedBox(
-                                height:
-                                    SteppPlaceSize.steppPlaceTileDescriptionSpace,
+                                height: SteppPlaceSize
+                                    .steppPlaceTileDescriptionSpace,
                               ),
                               Text(
                                 SteppPlaceUIStrings.steppPlaceDescription,
                                 style: context.textTheme.bodyMedium!
                                     .copyWith(color: Colors.white),
-                                maxLines:
-                                    SteppPlaceSize.steppPlaceDescriptionMaxLines,
+                                maxLines: SteppPlaceSize
+                                    .steppPlaceDescriptionMaxLines,
                                 overflow: TextOverflow.ellipsis,
                               ),
                               const SizedBox(
-                                height:
-                                    SteppPlaceSize.steppPlaceTileDescriptionSpace,
+                                height: SteppPlaceSize
+                                    .steppPlaceTileDescriptionSpace,
                               ),
                             ],
                           ),
@@ -122,7 +122,7 @@ class _SteppPlaceContentState extends State<SteppPlaceContent> {
                                         width: SteppPlaceSize
                                             .steppPlaceSaveIconTitleButtonSize,
                                       ),
-                                       Text(
+                                      Text(
                                         UiStrings.commonComment,
                                         style: context.textTheme.bodySmall!
                                             .copyWith(color: Colors.white),

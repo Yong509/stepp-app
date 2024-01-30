@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
+import 'package:stepp_app/pages/feed/feed_page.dart';
 import 'package:stepp_app/pages/place/stepp_place_page.dart';
 import 'package:stepp_app/providers/stepp_place_provider.dart';
 import 'package:stepp_app/styles/app_theme.dart';
@@ -32,7 +33,7 @@ class _SteppAppState extends State<SteppApp> {
           useMaterial3: true,
           textTheme: AppTheme.customTextTheme,
         ),
-        home: const SteppPlace(),
+        home: const FeedPage(),
       ),
     );
   }

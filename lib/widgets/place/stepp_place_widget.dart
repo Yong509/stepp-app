@@ -84,6 +84,26 @@ class _SteppPlaceWidgetState extends State<SteppPlaceWidget>
     });
   }
 
+  void onImageTapDown(TapDownDetails details) {
+    double tapPosition = details.globalPosition.dx;
+    if (tapPosition >
+        SteppPlaceSize.divideHalfScreen(context.deviceSize.width)) {
+      pageController.nextPage(
+        duration: const Duration(
+          milliseconds: SteppPlaceSize.durationPageTransition,
+        ),
+        curve: Curves.easeIn,
+      );
+    } else {
+      pageController.previousPage(
+        duration: const Duration(
+          milliseconds: SteppPlaceSize.durationPageTransition,
+        ),
+        curve: Curves.easeIn,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<SteppPlaceProvider>(
@@ -102,6 +122,7 @@ class _SteppPlaceWidgetState extends State<SteppPlaceWidget>
                   return GestureDetector(
                     onLongPressDown: (details) => animateController.stop(),
                     onLongPressUp: () => animateController.forward(),
+                    onTapDown: (details) => onImageTapDown(details),
                     child: ImageViewer(
                       imagePath: mockData[index % mockData.length].imagePath,
                     ),
