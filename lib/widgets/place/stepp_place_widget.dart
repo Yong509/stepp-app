@@ -86,7 +86,8 @@ class _SteppPlaceWidgetState extends State<SteppPlaceWidget>
 
   void onImageTapDown(TapDownDetails details) {
     double tapPosition = details.globalPosition.dx;
-    if (tapPosition > SteppPlaceSize.divideHalfScreen(context.deviceSize.width)) {
+    if (tapPosition >
+        SteppPlaceSize.divideHalfScreen(context.deviceSize.width)) {
       pageController.nextPage(
         duration: const Duration(
           milliseconds: SteppPlaceSize.durationPageTransition,
