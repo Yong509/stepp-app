@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stepp_app/constants/mock_data.dart';
+import 'package:stepp_app/constants/routes.dart';
 import 'package:stepp_app/data_models/feed/post.dart';
-import 'package:stepp_app/pages/place/stepp_place_page.dart';
 import 'package:stepp_app/widgets/feed/post_action_bar.dart';
 import 'package:stepp_app/widgets/feed/post_content.dart';
 import 'package:stepp_app/widgets/feed/post_header_bar.dart';
@@ -20,11 +20,7 @@ class _PostBoxState extends State<PostBox> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const SteppPlace(),
-          ),
-        );
+        Navigator.pushNamed(context, RouteNames.steppPlace);
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
