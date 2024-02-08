@@ -63,6 +63,8 @@ class Sizes {
   static const onlyBottomPaddingHuge = EdgeInsets.only(bottom: 24.0);
 
   static const iconSizeSmall = 16.0;
+  static const iconSizeMedium = 28.0;
+  static const iconSizeLarge = 40.0;
 
   static const borderWidthMedium = 1.0;
   static const borderWidthBig = 2.0;
@@ -99,4 +101,7 @@ class Sizes {
   static const appPageTemplateTopPadding = 16;
 
   static const sizedBoxHorizontalSpacingSmall = SizedBox(width: 8);
+
+  static const preferredSizeMax = 4.0;
+  static const preferredSizeHeightAppBar = 1.0;
 }

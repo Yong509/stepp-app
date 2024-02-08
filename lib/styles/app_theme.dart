@@ -24,5 +24,9 @@ class AppTheme {
       googleFontFamily,
       fontSize: 15,
     ),
+    titleLarge: GoogleFonts.getFont(
+      googleFontFamily,
+      fontSize: 20,
+    ),
   );
 }
