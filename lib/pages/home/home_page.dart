@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stepp_app/constants/sizes.dart';
-import 'package:stepp_app/pages/feed/feed_page.dart';
+import 'package:stepp_app/pages/home/feed/feed_page.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/widgets/page_layout.dart';
 
