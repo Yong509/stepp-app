@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:stepp_app/constants/routes.dart';
 import 'package:stepp_app/home/home_page.dart';
-import 'package:stepp_app/pages/feed/feed_page.dart';
 import 'package:stepp_app/providers/stepp_place_provider.dart';
 import 'package:stepp_app/services/http_client_service.dart';
 import 'package:stepp_app/styles/app_theme.dart';
