@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stepp_app/constants/feed/post_box_size.dart';
+import 'package:stepp_app/constants/home/feed/post_box_size.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 
 class PostContent extends StatefulWidget {
