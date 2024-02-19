@@ -8,7 +8,7 @@ import 'package:stepp_app/pages/home/feed/feed_page.dart';
 import 'package:stepp_app/providers/home/add_stepp_provider.dart';
 import 'package:stepp_app/providers/home/home_provider.dart';
 import 'package:stepp_app/styles/app_theme.dart';
-import 'package:stepp_app/widgets/home/add_stepp_panel.dart';
+import 'package:stepp_app/widgets/home/add/add_stepp_panel.dart';
 import 'package:stepp_app/widgets/page_layout.dart';
 
 class HomePage extends StatefulWidget {

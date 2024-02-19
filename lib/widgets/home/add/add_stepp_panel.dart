@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stepp_app/constants/home/home_page_size.dart';
 import 'package:stepp_app/styles/app_theme.dart';
-import 'package:stepp_app/widgets/home/add_stepp_tab.dart';
+import 'package:stepp_app/widgets/home/add/add_stepp_tab.dart';
 
 class AddSteppPanel extends StatefulWidget {
   const AddSteppPanel({super.key});
