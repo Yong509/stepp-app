@@ -25,9 +25,10 @@ class AddSteppTab extends StatelessWidget {
               tabs: AddSteppTabMenu.addSteppMenu,
             ),
             Flexible(
-                child: TabBarView(
-              children: AddSteppTabMenu.addSteppTabView,
-            ))
+              child: TabBarView(
+                children: AddSteppTabMenu.addSteppTabView,
+              ),
+            ),
           ],
         ),
       ),

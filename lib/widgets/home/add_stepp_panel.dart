@@ -15,15 +15,17 @@ class _AddSteppPanelState extends State<AddSteppPanel> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: HomePageSize.addStepPanelPadding,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.horizontal(
-          left: HomePageSize.addStepPanelBorderRadius,
-          right: HomePageSize.addStepPanelBorderRadius,
+          left: HomePageSize.addSteppPanelBorderRadius,
+          right: HomePageSize.addSteppPanelBorderRadius,
         ),
         color: Colors.black.withOpacity(AppTheme.opacity80Percent),
       ),
-      child: const AddSteppTab(),
+      child: const Padding(
+        padding: HomePageSize.addSteppPanelPadding,
+        child: AddSteppTab(),
+      ),
     );
   }
 }

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:stepp_app/widgets/place/stepp_place_widget.dart';
 
-class SteppPlace extends StatefulWidget {
-  const SteppPlace({super.key});
+class SteppPlacePage extends StatefulWidget {
+  const SteppPlacePage({super.key});
 
   @override
-  State<SteppPlace> createState() => _SteppPlaceState();
+  State<SteppPlacePage> createState() => _SteppPlacePageState();
 }
 
-class _SteppPlaceState extends State<SteppPlace> {
+class _SteppPlacePageState extends State<SteppPlacePage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: SteppPlaceWidget());
+    return const Scaffold(
+      body: SteppPlaceWidget(),
+    );
   }
 }
