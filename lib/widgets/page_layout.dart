@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:stepp_app/constants/home/home_page_size.dart';
 import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
 import 'package:stepp_app/providers/home/home_provider.dart';
@@ -53,9 +52,7 @@ class _PageLayoutState extends State<PageLayout> {
       selectedIndex = index;
     });
     if (index == 2) {
-      context.read<HomeProvider>().addPanelController.animatePanelToPosition(
-            HomePageSize.addSteppPanelHalfHeight,
-          );
+      context.read<HomeProvider>().addPanelController.open();
     }
   }
 

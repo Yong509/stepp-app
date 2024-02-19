@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -43,15 +42,12 @@ class _HomePageState extends State<HomePage> {
             centerTitle: false,
             hasBackButton: false,
             titleSpacing: false,
-            body: [
-              const SizedBox(),
-              const SizedBox(),
-              ChangeNotifierProvider<AddSteppProvider>(
-                create: (context) => AddSteppProvider(),
-                builder: (context, child) => const FeedPage(),
-              ),
-              const SizedBox(),
-              const SizedBox(),
+            body: const [
+              SizedBox(),
+              SizedBox(),
+              FeedPage(),
+              SizedBox(),
+              SizedBox(),
             ],
             actions: [
               IconButton(
@@ -78,7 +74,10 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           panelBuilder: (sc) {
-            return const AddSteppPanel();
+            return ChangeNotifierProvider(
+              create: (context) => AddSteppProvider(),
+              builder: (context, child) => const AddSteppPanel(),
+            );
           },
         );
       },
