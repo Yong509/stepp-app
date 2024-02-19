@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
+import 'package:stepp_app/providers/home/home_provider.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/common_app_bar.dart';
@@ -43,12 +45,15 @@ class PageLayout extends StatefulWidget {
 }
 
 class _PageLayoutState extends State<PageLayout> {
-  int selectedIndex = 0;
+  int selectedIndex = 2;
 
   void onTabTapped(int index) {
     setState(() {
       selectedIndex = index;
     });
+    if (index == 2) {
+      context.read<HomeProvider>().addPanelController.open();
+    }
   }
 
   AppBar _buildAppBarSection(BuildContext context) {
@@ -105,9 +110,7 @@ class _PageLayoutState extends State<PageLayout> {
                 label: UiStrings.emptyLabel,
               ))
           .toList(),
-      unselectedItemColor: theme.colorScheme.onBackground.withAlpha(
-        AppTheme.alpha36Percent
-      ),
+      unselectedItemColor: theme.colorScheme.onBackground.withAlpha(AppTheme.alpha36Percent),
       selectedItemColor: Colors.black,
       showSelectedLabels: false,
       showUnselectedLabels: false,

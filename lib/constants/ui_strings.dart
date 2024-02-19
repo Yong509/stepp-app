@@ -3,6 +3,9 @@ class UiStrings {
   static const commonFollow = "Follow";
   static const commonComment = "Comments";
   static const commonStepp = "Stepp";
+  static const commonPlace = "place";
+  static const commonTogether = "together";
+  static const wherehintText = "Where ... ?";
 
   static const emptyLabel = '';
 }
