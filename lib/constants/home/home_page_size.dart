@@ -8,4 +8,11 @@ class HomePageSize {
   static const addSteppPanelHalfHeight = 0.5;
   static const addSteppTabBarTabViewSpacing = 25.0;
   static const addSteppTabIconLabelSpacing = 6.0;
+
+  // image gallery grid view
+  static const imageCrossAxisCount = 4;
+  static const gridViewCrossAxisSpace = 2.5;
+  static const gridViewMainAxisSpace = 5.0;
+  static const gridViewTabViewSpacing = 10.0;
+  static const gridViewPadding = EdgeInsets.symmetric(horizontal: 3, vertical: 15);
 }
