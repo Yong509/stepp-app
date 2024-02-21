@@ -7,4 +7,5 @@ class HomePageSize {
   static const addSteppPanelMinHeight = 0.0;
   static const addSteppPanelHalfHeight = 0.5;
   static const addSteppTabBarTabViewSpacing = 25.0;
+  static const addSteppTabIconLabelSpacing = 6.0;
 }
