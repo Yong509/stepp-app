@@ -11,10 +11,10 @@ class HomePageSize {
 
   // image gallery grid view
   static const imageCrossAxisCount = 4;
-  static const gridViewCrossAxisSpace = 2.5;
-  static const gridViewMainAxisSpace = 5.0;
+  static const gridViewCrossAxisSpace = 1.5;
+  static const gridViewMainAxisSpace = 1.5;
   static const gridViewTabViewSpacing = 10.0;
-  static const gridViewPadding = EdgeInsets.symmetric(horizontal: 3, vertical: 15);
+  static const gridViewPadding = EdgeInsets.symmetric(horizontal: 3);
   static const selectImageIconPadding = EdgeInsets.only(bottom: 3, right: 3);
   static const selectImageIconBorderWidth = 2.0;
 }
