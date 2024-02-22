@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:stepp_app/constants/home/home_page_size.dart';
 import 'package:stepp_app/providers/image_gallery_provider.dart';
+import 'package:stepp_app/services/image_gallery_service.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/utils/list_helper.dart';
@@ -19,7 +20,7 @@ class ImageGalleryGrid extends StatefulWidget {
 
 class _ImageGalleryGridState extends State<ImageGalleryGrid> with TickerProviderStateMixin {
   final scrollController = ScrollController();
-  AssetEntity? selectEntity = null;
+  AssetEntity? selectEntity;
 
   @override
   void initState() {
@@ -95,6 +96,7 @@ class _ImageGalleryGridState extends State<ImageGalleryGrid> with TickerProvider
                 },
                 child: Stack(
                   children: [
+             
                     Positioned.fill(
                       child: AssetEntityImage(
                         entity,
@@ -122,28 +124,20 @@ class _ImageGalleryGridState extends State<ImageGalleryGrid> with TickerProvider
                         },
                       ),
                     ),
-                    selectEntity == entity
-                        ? Positioned.fill(
-                            child: Container(
-                              padding: HomePageSize.selectImageIconPadding,
-                              color: Colors.white.withOpacity(AppTheme.opacity46Percent),
-                              child: Align(
-                                alignment: Alignment.bottomRight,
-                                child: Material(
-                                  color: Colors.white,
-                                  shape: const CircleBorder(
-                                    side: BorderSide(
-                                      color: Colors.white,
-                                      width: HomePageSize.selectImageIconBorderWidth,
-                                    ),
-                                  ),
-                                  child: PhosphorIcon(
-                                    PhosphorIcons.checkCircle(PhosphorIconsStyle.fill),
-                                    color: Colors.green,
-                                  ),
-                                ),
+                    entity.type == AssetType.video
+                        ? Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              ImageGalleryService().convertSecondsToString(entity.duration),
+                              style: context.textTheme.labelSmall!.copyWith(
+                                color: Colors.white,
                               ),
                             ),
+                          )
+                        : const SizedBox(),
+                    selectEntity == entity
+                        ? Positioned.fill(
+                            child: _buildSelectIcon(),
                           )
                         : const SizedBox(),
                   ],
@@ -154,6 +148,29 @@ class _ImageGalleryGridState extends State<ImageGalleryGrid> with TickerProvider
           ),
         );
       },
+    );
+  }
+
+  Widget _buildSelectIcon() {
+    return Container(
+      padding: HomePageSize.selectImageIconPadding,
+      color: Colors.white.withOpacity(AppTheme.opacity46Percent),
+      child: Align(
+        alignment: Alignment.bottomRight,
+        child: Material(
+          color: Colors.white,
+          shape: const CircleBorder(
+            side: BorderSide(
+              color: Colors.white,
+              width: HomePageSize.selectImageIconBorderWidth,
+            ),
+          ),
+          child: PhosphorIcon(
+            PhosphorIcons.checkCircle(PhosphorIconsStyle.fill),
+            color: Colors.green,
+          ),
+        ),
+      ),
     );
   }
 }

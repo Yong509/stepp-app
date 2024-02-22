@@ -7,7 +7,6 @@ class ImageGalleryService {
     ),
   );
 
-
   Future<List<AssetPathEntity>> getAssets() async {
     final permission = await PhotoManager.requestPermissionExtend();
     if (permission.hasAccess || permission.isAuth) {
@@ -21,12 +20,17 @@ class ImageGalleryService {
     return [];
   }
 
-
   Future<List<AssetEntity>> loadAlbumAssets(AssetPathEntity album) async {
     int totalCount = await album.assetCountAsync;
     return await album.getAssetListPaged(
       page: 0,
       size: totalCount == 0 ? 1 : totalCount,
     );
+  }
+
+  String convertSecondsToString(int seconds) {
+    int minutes = seconds ~/ 60;
+    int remainingSeconds = seconds % 60;
+    return '$minutes:${remainingSeconds.toString().padLeft(2, '0')}';
   }
 }
