@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stepp_app/constants/home/home_page_size.dart';
+import 'package:stepp_app/constants/ui_strings.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/custom_text_field.dart';
@@ -25,11 +26,11 @@ class _ImageGalleryPanelState extends State<ImageGalleryPanel> {
         ),
         color: Colors.black.withOpacity(AppTheme.opacity80Percent),
       ),
-      padding: EdgeInsets.only(top: 45),
+      padding: HomePageSize.iamgeGalleryPanelPadding,
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
+            padding: HomePageSize.addSteppPadding,
             child: CustomTextField(
               controller: TextEditingController(),
               leadingIcon: PhosphorIcon(
@@ -38,19 +39,21 @@ class _ImageGalleryPanelState extends State<ImageGalleryPanel> {
                 ),
                 color: Colors.white,
               ),
-              hintText: "What is this stepp ... ?",
+              hintText: UiStrings.whatIsThisStepHintText,
             ),
           ),
           const SizedBox(
-            height: 20,
+            height: HomePageSize.addSteppInputGallerySpace,
           ),
           Text(
-            "Add a IMG/VDO from albums",
+            UiStrings.addImgOrVDOPlaceholder,
             style: context.textTheme.bodyMedium!.copyWith(
               color: Colors.white,
             ),
           ),
-          Expanded(child: ImageGalleryGrid()),
+          const Expanded(
+            child: ImageGalleryGrid(),
+          ),
         ],
       ),
     );

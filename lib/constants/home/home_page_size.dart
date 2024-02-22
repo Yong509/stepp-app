@@ -8,6 +8,8 @@ class HomePageSize {
   static const addSteppPanelHalfHeight = 0.5;
   static const addSteppTabBarTabViewSpacing = 25.0;
   static const addSteppTabIconLabelSpacing = 6.0;
+  static const addSteppPadding = EdgeInsets.symmetric(horizontal: 30);
+  static const addSteppInputGallerySpace = 20.0;
 
   // image gallery grid view
   static const imageCrossAxisCount = 4;
@@ -17,4 +19,5 @@ class HomePageSize {
   static const gridViewPadding = EdgeInsets.symmetric(horizontal: 3);
   static const selectImageIconPadding = EdgeInsets.only(bottom: 3, right: 3);
   static const selectImageIconBorderWidth = 2.0;
+  static const iamgeGalleryPanelPadding = EdgeInsets.only(top: 45);
 }
