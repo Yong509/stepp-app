@@ -105,5 +105,4 @@ class Sizes {
   static const preferredSizeMax = 4.0;
   static const preferredSizeHeightAppBar = 1.0;
 
-  static const initAssetSize = 50;
 }

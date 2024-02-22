@@ -15,19 +15,14 @@ class ImageGalleryProvider extends ChangeNotifier {
     PMDarwinAssetCollectionSubtype.smartAlbumUserLibrary,
     PMDarwinAssetCollectionSubtype.smartAlbumVideos,
   ];
-  bool isProcessing = false;
 
   Future<void> initialGallery() async {
-    startProcessing();
-
     final allAssets = await imageGalleryService.getAssets();
     entities = filterCollections(allAssets);
     for (var element in entities!) {
       final entity = await imageGalleryService.loadAlbumAssets(element);
       assetEntity!.add(entity);
     }
-    endProcessing();
-
     notifyListeners();
   }
 
@@ -37,22 +32,4 @@ class ImageGalleryProvider extends ChangeNotifier {
           element.darwinType == PMDarwinAssetCollectionType.album;
     }).toList();
   }
-
-  void startProcessing() {
-    isProcessing = true;
-    notifyListeners();
-  }
-
-  void endProcessing() {
-    isProcessing = false;
-    notifyListeners();
-  }
-
-  // Future<void> loadMoreAccess() async {
-  //   final moreAsset = await imageGalleryService.loadMoreAssets();
-  //   for (var element in moreAsset) {
-  //     entities = [...entities!, if (!entities!.contains(element)) element];
-  //   }
-  //   notifyListeners();
-  // }
 }

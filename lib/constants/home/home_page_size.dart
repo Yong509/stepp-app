@@ -15,4 +15,6 @@ class HomePageSize {
   static const gridViewMainAxisSpace = 5.0;
   static const gridViewTabViewSpacing = 10.0;
   static const gridViewPadding = EdgeInsets.symmetric(horizontal: 3, vertical: 15);
+  static const selectImageIconPadding = EdgeInsets.only(bottom: 3, right: 3);
+  static const selectImageIconBorderWidth = 2.0;
 }

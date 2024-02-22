@@ -1,5 +1,4 @@
 import 'package:photo_manager/photo_manager.dart';
-import 'package:stepp_app/constants/sizes.dart';
 
 class ImageGalleryService {
   final FilterOptionGroup _filterOptionGroup = FilterOptionGroup(
@@ -7,9 +6,7 @@ class ImageGalleryService {
       sizeConstraint: SizeConstraint(ignoreSize: true),
     ),
   );
-  final int _sizePerPage = Sizes.initAssetSize;
-  late AssetPathEntity _path;
-  int _page = 0;
+
 
   Future<List<AssetPathEntity>> getAssets() async {
     final permission = await PhotoManager.requestPermissionExtend();
@@ -24,19 +21,12 @@ class ImageGalleryService {
     return [];
   }
 
-  Future<List<AssetEntity>> loadMoreAssets() async {
-    final entities = await _path.getAssetListPaged(
-      page: _page + 1,
-      size: _sizePerPage,
-    );
-    _page++;
-    return entities;
-  }
 
   Future<List<AssetEntity>> loadAlbumAssets(AssetPathEntity album) async {
+    int totalCount = await album.assetCountAsync;
     return await album.getAssetListPaged(
       page: 0,
-      size: _sizePerPage,
+      size: totalCount == 0 ? 1 : totalCount,
     );
   }
 }
