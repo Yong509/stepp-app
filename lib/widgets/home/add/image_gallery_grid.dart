@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:stepp_app/constants/home/home_page_size.dart';
 import 'package:stepp_app/providers/image_gallery_provider.dart';
-import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/utils/list_helper.dart';
 
@@ -96,10 +94,8 @@ class _ImageGalleryGridState extends State<ImageGalleryGrid> {
                     if (((child as Semantics).child as RawImage).image != null) {
                       return child;
                     }
-                    return Shimmer.fromColors(
-                      baseColor: AppTheme.black900.withAlpha(AppTheme.alpha4Percent),
-                      highlightColor: AppTheme.black900,
-                      child: const Card(
+                    return const Skeletonizer(
+                      child: Card(
                         margin: EdgeInsets.zero,
                         shape: OutlineInputBorder(
                           borderRadius: BorderRadius.zero,
