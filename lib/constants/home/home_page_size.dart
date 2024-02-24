@@ -9,15 +9,16 @@ class HomePageSize {
   static const addSteppTabBarTabViewSpacing = 25.0;
   static const addSteppTabIconLabelSpacing = 6.0;
   static const addSteppPadding = EdgeInsets.symmetric(horizontal: 30);
-  static const addSteppInputGallerySpace = 20.0;
+  static const addSteppInputGallerySpace = 15.0;
 
   // image gallery grid view
-  static const imageCrossAxisCount = 4;
+  static const imageCrossAxisCount = 3;
   static const gridViewCrossAxisSpace = 1.5;
   static const gridViewMainAxisSpace = 1.5;
   static const gridViewTabViewSpacing = 10.0;
   static const gridViewPadding = EdgeInsets.symmetric(horizontal: 3);
   static const selectImageIconPadding = EdgeInsets.only(bottom: 3, right: 3);
   static const selectImageIconBorderWidth = 2.0;
-  static const iamgeGalleryPanelPadding = EdgeInsets.only(top: 45);
+  static const imageGalleryPanelPadding = EdgeInsets.only(top: 30);
+  static const whatIsSteppTextFiledHeight = 50.0;
 }

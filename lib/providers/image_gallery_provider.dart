@@ -16,6 +16,8 @@ class ImageGalleryProvider extends ChangeNotifier {
     PMDarwinAssetCollectionSubtype.smartAlbumVideos,
   ];
 
+  List<List<AssetEntity>>? createSteppAssetEntity = [];
+
   Future<void> initialGallery() async {
     final allAssets = await imageGalleryService.getAssets();
     entities = filterCollections(allAssets);

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Sizes {
+  static const spacing5 = 5.0;
   static const spacing10 = 10.0;
+  static const spacing15 = 15.0;
+
   static const horizontalPaddingTiny = EdgeInsets.symmetric(horizontal: 3.0);
   static const horizontalPaddingSmall = EdgeInsets.symmetric(horizontal: 4.0);
   static const horizontalPaddingMediumSmall = EdgeInsets.symmetric(horizontal: 8.0);

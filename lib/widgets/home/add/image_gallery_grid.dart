@@ -5,6 +5,7 @@ import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:stepp_app/constants/home/home_page_size.dart';
+import 'package:stepp_app/providers/home/add_stepp_provider.dart';
 import 'package:stepp_app/providers/image_gallery_provider.dart';
 import 'package:stepp_app/services/image_gallery_service.dart';
 import 'package:stepp_app/styles/app_theme.dart';
@@ -90,13 +91,11 @@ class _ImageGalleryGridState extends State<ImageGalleryGrid> with TickerProvider
               final entity = album[index];
               return GestureDetector(
                 onTap: () async {
-                  setState(() {
-                    selectEntity = entity;
-                  });
+                  final file = await entity.file;
+                  if (context.mounted) context.read<AddSteppProvider>().currentEntity = file;
                 },
                 child: Stack(
                   children: [
-             
                     Positioned.fill(
                       child: AssetEntityImage(
                         entity,
