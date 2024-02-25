@@ -75,6 +75,10 @@ class Sizes {
   static const borderWidthMedium = 1.0;
   static const borderWidthBig = 2.0;
   static const borderRadiusTiny = 4.0;
+  static const borderRadiusSmall = 8.0;
+  static const borderRadiusMedium = 16.0;
+  static const borderRadiusBig = 20.0;
+  
   static const tileButtonMinimumWidth = 9.0;
   static const tileButtonMinimumHeight = 5.0;
   static const tileButtonElevation = 2.0;

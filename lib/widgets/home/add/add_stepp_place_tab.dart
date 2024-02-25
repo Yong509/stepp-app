@@ -9,6 +9,7 @@ import 'package:stepp_app/constants/mock_data.dart';
 import 'package:stepp_app/constants/routes.dart';
 import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
+import 'package:stepp_app/data_models/stepp_place/add_stepp_place_model.dart';
 import 'package:stepp_app/providers/home/add_stepp_provider.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/custom_opacity_button.dart';
@@ -69,9 +70,17 @@ class _AddSteppPlaceTabState extends State<AddSteppPlaceTab> {
                 child: CustomButton(
                   onTap: () {
                     if (value.titleTextController.text != UiStrings.emptyLabel) {
+                      value.currentAddStepp = AddSteppPlaceModel(
+                        steppTitle: value.titleTextController.text,
+                        description: value.descriptionTextController.text,
+                        place: value.selectPlace,
+                      );
                       Navigator.pushNamed(
                         context,
                         RouteNames.previewAddStepp,
+                        arguments: {
+                          "addSteppProvider": Provider.of<AddSteppProvider>(context, listen: false),
+                        },
                       );
                     } else {
                       setState(() {
@@ -126,7 +135,7 @@ class _AddSteppPlaceTabState extends State<AddSteppPlaceTab> {
                             ),
                             color: Colors.white,
                           ),
-                          controller: TextEditingController(),
+                          controller: value.titleTextController,
                           hintText: UiStrings.wherehintText,
                           removePadding: true,
                         ),
@@ -155,7 +164,7 @@ class _AddSteppPlaceTabState extends State<AddSteppPlaceTab> {
                 Expanded(
                   child: CustomTextField(
                     backgroundColor: Colors.transparent,
-                    controller: TextEditingController(),
+                    controller: value.descriptionTextController,
                     hintText: HomePageUiStrings.descriptionHintText,
                     maxLine: HomePageSize.addSteppDescriptionMinLine,
                     hintTextStyle: context.textTheme.bodySmall,

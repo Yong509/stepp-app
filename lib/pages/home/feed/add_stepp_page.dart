@@ -4,13 +4,16 @@ import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/providers/home/add_stepp_provider.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/widgets/home/add/image_gallery_panel.dart';
 import 'package:video_player/video_player.dart';
 
 class AddSteppPage extends StatefulWidget {
-  const AddSteppPage({super.key});
+  const AddSteppPage({Key? key}) : super(key: key);
+
+
 
   @override
   State<AddSteppPage> createState() => _AddSteppPageState();
@@ -18,6 +21,12 @@ class AddSteppPage extends StatefulWidget {
 
 class _AddSteppPageState extends State<AddSteppPage> {
   VideoPlayerController? _videoPlayerController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -42,14 +51,29 @@ class _AddSteppPageState extends State<AddSteppPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SlidingUpPanel(
-        color: Colors.transparent,
-        panel: const ImageGalleryPanel(),
-        body: Stack(
-          children: [
-            _buildCover(),
-          ],
-        ),
+      body: Consumer<AddSteppProvider>(
+        builder: (context, value, child) {
+          return SlidingUpPanel(
+            color: Colors.transparent,
+            panel: const ImageGalleryPanel(),
+            body: Stack(
+              children: [
+                _buildCover(),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(AppTheme.opacity80Percent),
+                    borderRadius: BorderRadius.circular(
+                      Sizes.borderRadiusBig,
+                    ),
+                  ),
+                  child: Text(
+                    value.currentAddStepp?.place?.placeTitle ?? "Empty",
+                  ),
+                )
+              ],
+            ),
+          );
+        },
       ),
     );
   }

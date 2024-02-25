@@ -14,6 +14,8 @@ class Routes {
           builder: (context, child) => const SteppPlacePage(),
         ),
     RouteNames.previewAddStepp: (context) {
+      final Map args = ModalRoute.of(context)!.settings.arguments as Map;
+      final AddSteppProvider addSteppProvider = args[RouteParameters.addSteppProvider] as AddSteppProvider;
       return MultiProvider(
         providers: [
           Provider(create: (context) => ImageGalleryService()),
@@ -22,9 +24,7 @@ class Routes {
               Provider.of<ImageGalleryService>(context, listen: false),
             ),
           ),
-          ChangeNotifierProvider(
-            create: (context) => AddSteppProvider(),
-          )
+          ChangeNotifierProvider.value(value: addSteppProvider)
         ],
         child: const AddSteppPage(),
       );
@@ -37,4 +37,6 @@ class RouteNames {
   static const previewAddStepp = "previewAddStepp";
 }
 
-class RouteParameters {}
+class RouteParameters {
+  static const addSteppProvider = "addSteppProvider";
+}

@@ -1,11 +1,28 @@
 import 'package:photo_manager/photo_manager.dart';
+import 'package:stepp_app/constants/mock_data.dart';
 
 class AddSteppPlaceModel {
-  const AddSteppPlaceModel({
+  AddSteppPlaceModel({
     required this.steppTitle,
-    required this.image,
+    this.stepps,
+    this.description,
+    this.place,
   });
 
   final String steppTitle;
-  final AssetEntity image;
+  String? description;
+  List<EachStepp>? stepps;
+  Place? place;
+}
+
+class EachStepp {
+  EachStepp({
+    this.image,
+    this.title,
+    this.description,
+  });
+
+  AssetEntity? image;
+  String? title;
+  String? description;
 }

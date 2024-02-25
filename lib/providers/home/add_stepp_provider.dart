@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:stepp_app/constants/mock_data.dart';
@@ -8,28 +7,32 @@ class AddSteppProvider extends ChangeNotifier {
   AddSteppProvider({this.panelScrollController});
   final ScrollController? panelScrollController;
 
-  final TextEditingController addSteppTextController = TextEditingController();
-  List<AddSteppPlaceModel> stepps = [];
-
+  AddSteppPlaceModel? _currentAddStepp;
+  AddSteppPlaceModel? get currentAddStepp => _currentAddStepp;
   AssetEntity? _currentEntity;
+  AssetEntity? get currentEntity => _currentEntity;
   Place? _selectPlace;
+  Place? get selectPlace => _selectPlace;
   TextEditingController titleTextController = TextEditingController();
+  TextEditingController descriptionTextController = TextEditingController();
 
   set selectPlace(Place? place) {
     _selectPlace = place;
     notifyListeners();
   }
 
-  Place? get selectPlace => _selectPlace;
-
   set currentEntity(AssetEntity? entity) {
     _currentEntity = entity;
     notifyListeners();
   }
 
-  AssetEntity? get currentEntity => _currentEntity;
+  set currentAddStepp(AddSteppPlaceModel? stepp) {
+    _currentAddStepp = stepp;
+    notifyListeners();
+  }
 
-  Future<File?> convertToFile() async {
-    return await _currentEntity?.file;
+  void appendEachStepp(EachStepp stepp) {
+    _currentAddStepp?.stepps?.add(stepp);
+    notifyListeners();
   }
 }

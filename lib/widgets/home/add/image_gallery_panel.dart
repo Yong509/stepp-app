@@ -86,7 +86,7 @@ class _ImageGalleryPanelState extends State<ImageGalleryPanel> {
                           width: Sizes.spacing10,
                         ),
                         Text(
-                          HomePageUiStrings.currentAddSteppIndex(addSteppProvider.stepps.length),
+                          HomePageUiStrings.currentAddSteppIndex(addSteppProvider.currentAddStepp?.stepps?.length ?? 0),
                           style: context.textTheme.labelLarge!.copyWith(color: Colors.white),
                         )
                       ],
