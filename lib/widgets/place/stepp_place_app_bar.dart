@@ -57,7 +57,7 @@ class _SteppPlaceAppBarState extends State<SteppPlaceAppBar> {
               context.deviceSize.width,
             ),
           ),
-          CustomOpacityButton(
+          CustomButton(
             padding: SteppPlaceSize.saveButtonPadding,
             child: Row(
               children: [

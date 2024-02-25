@@ -109,7 +109,7 @@ class _SteppPlaceContentState extends State<SteppPlaceContent> {
                                 _triggerOpenComment(),
                               ),
                               child: IntrinsicWidth(
-                                child: CustomOpacityButton(
+                                child: CustomButton(
                                   child: Row(
                                     children: [
                                       const Icon(

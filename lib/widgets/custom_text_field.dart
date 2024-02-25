@@ -8,17 +8,24 @@ class CustomTextField extends StatefulWidget {
     required this.controller,
     this.leadingIcon,
     this.hintText,
+    this.maxLine,
+    this.backgroundColor,
+    this.hintTextStyle,
   });
 
   final TextEditingController controller;
   final Widget? leadingIcon;
   final String? hintText;
+  final int? maxLine;
+  final Color? backgroundColor;
+  final TextStyle? hintTextStyle;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
+  TextStyle? _buildHintTextStyle() => widget.hintTextStyle ?? context.textTheme.bodyLarge;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -27,11 +34,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
       style: context.textTheme.bodyLarge!.copyWith(
         color: Colors.white,
       ),
+      maxLines: widget.maxLine,
       decoration: InputDecoration(
         filled: true,
-        fillColor: Colors.black,
+        fillColor: widget.backgroundColor ?? Colors.black,
         hintText: widget.hintText,
-        hintStyle: context.textTheme.bodyLarge!.copyWith(
+        hintStyle: _buildHintTextStyle()!.copyWith(
           color: Colors.white,
         ),
         prefixIcon: widget.leadingIcon,

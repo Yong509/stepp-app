@@ -73,9 +73,9 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          panelBuilder: (sc) {
+          panelBuilder: (scrollController) {
             return ChangeNotifierProvider(
-              create: (context) => AddSteppProvider(),
+              create: (context) => AddSteppProvider(panelScrollController: scrollController),
               builder: (context, child) => const AddSteppPanel(),
             );
           },

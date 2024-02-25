@@ -77,7 +77,7 @@ class _SteppPlacePanelState extends State<SteppPlacePanel> {
             height: Sizes.spacing10,
           ),
           IntrinsicWidth(
-            child: CustomOpacityButton(
+            child: CustomButton(
               padding: SteppPlaceSize.steppPlaceSteppButtonPadding,
               child: Row(
                 children: [

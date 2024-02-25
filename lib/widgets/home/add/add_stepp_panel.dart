@@ -20,7 +20,7 @@ class _AddSteppPanelState extends State<AddSteppPanel> {
           left: HomePageSize.addSteppPanelBorderRadius,
           right: HomePageSize.addSteppPanelBorderRadius,
         ),
-        color: Colors.black.withOpacity(AppTheme.opacity80Percent),
+        color: Colors.black.withOpacity(AppTheme.opacity90Percent),
       ),
       child: const Padding(
         padding: HomePageSize.addSteppPanelPadding,

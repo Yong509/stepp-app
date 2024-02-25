@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Sizes {
+  static const spacing0 = 0.0;
   static const spacing5 = 5.0;
   static const spacing10 = 10.0;
   static const spacing15 = 15.0;
@@ -45,6 +46,8 @@ class Sizes {
   static const onlyLeftPaddingSmall = EdgeInsets.only(left: 8.0);
   static const onlyLeftPaddingMidSize = EdgeInsets.only(left: 12.0);
   static const onlyLeftPaddingMedium = EdgeInsets.only(left: 16.0);
+  static const onlyLeftPaddingBig = EdgeInsets.only(left: 30.0);
+  static const onlyLeftPaddingHuge = EdgeInsets.only(left: 48.0);
   static const onlyTopPaddingLittle = EdgeInsets.only(top: 4.0);
   static const onlyTopPaddingSmall = EdgeInsets.only(top: 8.0);
   static const onlyTopPaddingMedium = EdgeInsets.only(top: 10.0);
@@ -81,7 +84,7 @@ class Sizes {
   static const notificationTimeCustomButtonWidthFraction = 0.30;
 
   static const allRoundBorderSmall = BorderRadius.all(Radius.circular(8.0));
-  static const allRoundBorderMedium = BorderRadius.all(Radius.circular(16.0));
+  static const allRoundBorderMedium = BorderRadius.all(Radius.circular(20.0));
 
   static const allRoundBorderExtraLarge = BorderRadius.all(Radius.circular(50.0));
 
