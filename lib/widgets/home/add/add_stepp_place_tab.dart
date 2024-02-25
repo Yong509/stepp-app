@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:stepp_app/constants/home/feed/post_box_size.dart';
@@ -24,60 +23,75 @@ class AddSteppPlaceTab extends StatefulWidget {
 
 class _AddSteppPlaceTabState extends State<AddSteppPlaceTab> {
   bool isSelectPlace = false;
+  bool titleError = false;
+  final titleAndDescriptionFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+    return Consumer<AddSteppProvider>(
+      builder: (context, value, child) {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CircleAvatar(
-                    radius: PostBoxSize.profilePosterRadius,
-                    backgroundImage: const AssetImage(
-                      'assets/images/avatar-3.png',
-                    ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      CircleAvatar(
+                        radius: PostBoxSize.profilePosterRadius,
+                        backgroundImage: const AssetImage(
+                          'assets/images/avatar-3.png',
+                        ),
+                      ),
+                      const SizedBox(
+                        height: Sizes.spacing5,
+                      ),
+                      Text(
+                        PostBoxUiStrings.mockPosterName,
+                        style: context.textTheme.bodyLarge!.copyWith(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(
-                    height: Sizes.spacing5,
+                    width: Sizes.spacing15,
                   ),
-                  Text(
-                    PostBoxUiStrings.mockPosterName,
-                    style: context.textTheme.bodyLarge!.copyWith(
+                  isSelectPlace ? _buildCreatePostTitle() : _buildSearchPlace(),
+                ],
+              ),
+            ),
+            if (isSelectPlace)
+              Flexible(
+                child: CustomButton(
+                  onTap: () {
+                    if (value.titleTextController.text != UiStrings.emptyLabel) {
+                      Navigator.pushNamed(
+                        context,
+                        RouteNames.previewAddStepp,
+                      );
+                    } else {
+                      setState(() {
+                        titleError = true;
+                      });
+                    }
+                  },
+                  isOpacity: false,
+                  backgroundColor: Colors.black,
+                  child: Text(
+                    HomePageUiStrings.startSteppTextButton,
+                    style: context.textTheme.bodyMedium!.copyWith(
                       color: Colors.white,
                     ),
                   ),
-                ],
+                ),
               ),
-              const SizedBox(
-                width: Sizes.spacing15,
-              ),
-              isSelectPlace ? _buildCreatePostTitle() : _buildSearchPlace(),
-            ],
-          ),
-        ),
-        Flexible(
-          child: CustomButton(
-            onTap: () => Navigator.pushNamed(
-              context,
-              RouteNames.previewAddStepp,
-            ),
-            isOpacity: false,
-            backgroundColor: Colors.black,
-            child: Text(
-              HomePageUiStrings.startSteppTextButton,
-              style: context.textTheme.bodyMedium!.copyWith(
-                color: Colors.white,
-              ),
-            ),
-          ),
-        )
-      ],
+          ],
+        );
+      },
     );
   }
 
@@ -85,62 +99,70 @@ class _AddSteppPlaceTabState extends State<AddSteppPlaceTab> {
     return Consumer<AddSteppProvider>(
       builder: (context, value, child) {
         return Expanded(
-          child: Column(
-            children: [
-              ListTile(
-                minVerticalPadding: Sizes.spacing5,
-                dense: true,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: Sizes.allRoundBorderMedium,
-                ),
-                contentPadding: EdgeInsets.zero,
-                tileColor: Colors.black,
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 42,
-                      child: CustomTextField(
-                        leadingIcon: PhosphorIcon(
-                          PhosphorIcons.mapPin(
-                            PhosphorIconsStyle.fill,
-                          ),
-                          color: Colors.white,
-                        ),
-                        controller: TextEditingController(),
-                        hintText: UiStrings.wherehintText,
-                      ),
+          child: Form(
+            key: titleAndDescriptionFormKey,
+            child: Column(
+              children: [
+                ListTile(
+                  minVerticalPadding: Sizes.spacing5,
+                  dense: true,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: Sizes.allRoundBorderMedium,
+                    side: BorderSide(
+                      color: titleError ? Colors.red : Colors.black,
                     ),
-                    GestureDetector(
-                      onTap: () => setState(() {
-                        isSelectPlace = false;
-                      }),
-                      child: Padding(
-                        padding: Sizes.onlyLeftPaddingHuge,
-                        child: Text(
-                          HomePageUiStrings.selectPlacePrompt(value.selectPlace?.placeTitle ?? ""),
-                          style: context.textTheme.bodySmall!.copyWith(
+                  ),
+                  contentPadding: EdgeInsets.zero,
+                  tileColor: Colors.black,
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: HomePageSize.addSteppTitleInputHeight,
+                        child: CustomTextField(
+                          leadingIcon: PhosphorIcon(
+                            PhosphorIcons.mapPin(
+                              PhosphorIconsStyle.fill,
+                            ),
                             color: Colors.white,
                           ),
+                          controller: TextEditingController(),
+                          hintText: UiStrings.wherehintText,
+                          removePadding: true,
                         ),
                       ),
-                    ),
-                  ],
+                      GestureDetector(
+                        onTap: () => setState(() {
+                          isSelectPlace = false;
+                          titleError = false;
+                        }),
+                        child: Padding(
+                          padding: Sizes.onlyLeftPaddingHuge,
+                          child: Text(
+                            HomePageUiStrings.selectPlacePrompt(value.selectPlace?.placeTitle ?? ""),
+                            style: context.textTheme.bodySmall!.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: Sizes.spacing15,
-              ),
-              Expanded(
-                child: CustomTextField(
-                  backgroundColor: Colors.transparent,
-                  controller: TextEditingController(),
-                  hintText: HomePageUiStrings.descriptionHintText,
-                  maxLine: HomePageSize.addSteppDescriptionMinLine,
-                  hintTextStyle: context.textTheme.bodySmall,
+                const SizedBox(
+                  height: Sizes.spacing15,
                 ),
-              ),
-            ],
+                Expanded(
+                  child: CustomTextField(
+                    backgroundColor: Colors.transparent,
+                    controller: TextEditingController(),
+                    hintText: HomePageUiStrings.descriptionHintText,
+                    maxLine: HomePageSize.addSteppDescriptionMinLine,
+                    hintTextStyle: context.textTheme.bodySmall,
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

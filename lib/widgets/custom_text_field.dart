@@ -11,6 +11,8 @@ class CustomTextField extends StatefulWidget {
     this.maxLine,
     this.backgroundColor,
     this.hintTextStyle,
+    this.validator,
+    this.removePadding = false,
   });
 
   final TextEditingController controller;
@@ -19,6 +21,8 @@ class CustomTextField extends StatefulWidget {
   final int? maxLine;
   final Color? backgroundColor;
   final TextStyle? hintTextStyle;
+  final String? Function(String?)? validator;
+  final bool? removePadding;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -29,6 +33,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTapOutside: (PointerDownEvent event) {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      textInputAction: TextInputAction.done,
       controller: widget.controller,
       cursorColor: Colors.white,
       style: context.textTheme.bodyLarge!.copyWith(
@@ -36,6 +44,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       ),
       maxLines: widget.maxLine,
       decoration: InputDecoration(
+        contentPadding: widget.removePadding! ? EdgeInsets.zero : null,
         filled: true,
         fillColor: widget.backgroundColor ?? Colors.black,
         hintText: widget.hintText,
@@ -62,6 +71,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ),
         ),
       ),
+      validator: widget.validator,
     );
   }
 }

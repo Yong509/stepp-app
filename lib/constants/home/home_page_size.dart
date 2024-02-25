@@ -11,6 +11,7 @@ class HomePageSize {
   static const addSteppPadding = EdgeInsets.symmetric(horizontal: 30);
   static const addSteppInputGallerySpace = 15.0;
   static const addSteppDescriptionMinLine = 5;
+  static const addSteppTitleInputHeight = 42.0;
 
   // image gallery grid view
   static const imageCrossAxisCount = 3;

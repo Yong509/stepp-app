@@ -13,6 +13,7 @@ class AddSteppProvider extends ChangeNotifier {
 
   AssetEntity? _currentEntity;
   Place? _selectPlace;
+  TextEditingController titleTextController = TextEditingController();
 
   set selectPlace(Place? place) {
     _selectPlace = place;
