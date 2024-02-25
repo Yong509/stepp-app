@@ -90,9 +90,8 @@ class _ImageGalleryGridState extends State<ImageGalleryGrid> with TickerProvider
             (context, index) {
               final entity = album[index];
               return GestureDetector(
-                onTap: () async {
-                  final file = await entity.file;
-                  if (context.mounted) context.read<AddSteppProvider>().currentEntity = file;
+                onTap: () {
+                  context.read<AddSteppProvider>().currentEntity = entity;
                 },
                 child: Stack(
                   children: [
