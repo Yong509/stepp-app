@@ -35,4 +35,15 @@ class AddSteppProvider extends ChangeNotifier {
     _currentAddStepp?.stepps?.add(stepp);
     notifyListeners();
   }
+
+  void setEachStepp(EachStepp stepp, String id) {
+    final index = _currentAddStepp?.stepps?.indexWhere((element) => element.id == id);
+    if (index != null) {
+      _currentAddStepp!.stepps![index]
+        ..description = stepp.description
+        ..image = stepp.image
+        ..title = stepp.title;
+      notifyListeners();
+    }
+  }
 }

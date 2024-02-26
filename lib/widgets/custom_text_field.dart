@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/constants/widgets/custom_text_field_size.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 
@@ -44,7 +45,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       ),
       maxLines: widget.maxLine,
       decoration: InputDecoration(
-        contentPadding: widget.removePadding! ? EdgeInsets.zero : null,
+        contentPadding: widget.removePadding! ? Sizes.horizontalPaddingMediumSmall : null,
         filled: true,
         fillColor: widget.backgroundColor ?? Colors.black,
         hintText: widget.hintText,

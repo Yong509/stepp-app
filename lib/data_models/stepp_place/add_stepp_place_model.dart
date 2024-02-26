@@ -1,5 +1,6 @@
 import 'package:photo_manager/photo_manager.dart';
 import 'package:stepp_app/constants/mock_data.dart';
+import 'package:uuid/uuid.dart';
 
 class AddSteppPlaceModel {
   AddSteppPlaceModel({
@@ -20,8 +21,11 @@ class EachStepp {
     this.image,
     this.title,
     this.description,
-  });
+  }) {
+    id = const Uuid().v4();
+  }
 
+  String? id;
   AssetEntity? image;
   String? title;
   String? description;

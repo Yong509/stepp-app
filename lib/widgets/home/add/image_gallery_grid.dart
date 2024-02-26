@@ -13,7 +13,11 @@ import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/utils/list_helper.dart';
 
 class ImageGalleryGrid extends StatefulWidget {
-  const ImageGalleryGrid({super.key});
+  const ImageGalleryGrid({
+    super.key,
+    this.isSelect,
+  });
+  final Function(AssetEntity?)? isSelect;
 
   @override
   State<ImageGalleryGrid> createState() => _ImageGalleryGridState();
@@ -92,6 +96,8 @@ class _ImageGalleryGridState extends State<ImageGalleryGrid> with TickerProvider
               return GestureDetector(
                 onTap: () {
                   context.read<AddSteppProvider>().currentEntity = entity;
+                  context.read<AddSteppProvider>().currentAddStepp?.stepps?[0].image = entity;
+                  widget.isSelect!(entity);
                 },
                 child: Stack(
                   children: [

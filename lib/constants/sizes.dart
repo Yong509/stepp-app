@@ -59,8 +59,8 @@ class Sizes {
   static const onlyRightPaddingMidSize = EdgeInsets.only(right: 8.0);
   static const onlyRightPaddingMedium = EdgeInsets.only(right: 10.0);
   static const onlyRightPaddingMediumLarge = EdgeInsets.only(right: 12.0);
-  static const onlyRightPaddingBig = EdgeInsets.only(right: 16.0);
-  static const onlyRightPaddingHuge = EdgeInsets.only(right: 26.0);
+  static const onlyRightPaddingBig = EdgeInsets.only(right: 30.0);
+  static const onlyRightPaddingHuge = EdgeInsets.only(right: 48.0);
   static const onlyBottomPaddingTiny = EdgeInsets.only(bottom: 2.0);
   static const onlyBottomPaddingLittle = EdgeInsets.only(bottom: 4.0);
   static const onlyBottomPaddingSmall = EdgeInsets.only(bottom: 8.0);

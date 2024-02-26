@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:stepp_app/pages/home/feed/add_stepp_page.dart';
+import 'package:stepp_app/pages/home/feed/add_each_stepp_page.dart';
 import 'package:stepp_app/pages/place/stepp_place_page.dart';
 import 'package:stepp_app/providers/home/add_stepp_provider.dart';
 import 'package:stepp_app/providers/image_gallery_provider.dart';
@@ -13,7 +13,7 @@ class Routes {
           create: (context) => SteppPlaceProvider(),
           builder: (context, child) => const SteppPlacePage(),
         ),
-    RouteNames.previewAddStepp: (context) {
+    RouteNames.addEachSteppPage: (context) {
       final Map args = ModalRoute.of(context)!.settings.arguments as Map;
       final AddSteppProvider addSteppProvider = args[RouteParameters.addSteppProvider];
       return MultiProvider(
@@ -26,7 +26,9 @@ class Routes {
           ),
           ChangeNotifierProvider.value(value: addSteppProvider)
         ],
-        child: const AddSteppPage(),
+        child: AddEachSteppPage(
+          eachStepp: addSteppProvider.currentAddStepp!.stepps!.first,
+        ),
       );
     }
   };
@@ -34,7 +36,7 @@ class Routes {
 
 class RouteNames {
   static const steppPlace = "steppPlace";
-  static const previewAddStepp = "previewAddStepp";
+  static const addEachSteppPage = "addEachSteppPage";
 }
 
 class RouteParameters {

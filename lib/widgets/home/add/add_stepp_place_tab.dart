@@ -74,12 +74,15 @@ class _AddSteppPlaceTabState extends State<AddSteppPlaceTab> {
                         steppTitle: value.titleTextController.text,
                         description: value.descriptionTextController.text,
                         place: value.selectPlace,
+                        stepps: [
+                          EachStepp(),
+                        ],
                       );
                       Navigator.pushNamed(
                         context,
-                        RouteNames.previewAddStepp,
+                        RouteNames.addEachSteppPage,
                         arguments: {
-                          "addSteppProvider": Provider.of<AddSteppProvider>(context, listen: false),
+                          RouteParameters.addSteppProvider: Provider.of<AddSteppProvider>(context, listen: false),
                         },
                       );
                     } else {

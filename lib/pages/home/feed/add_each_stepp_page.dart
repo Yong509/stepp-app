@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
@@ -10,27 +8,30 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:stepp_app/constants/home/home_page_ui_strings.dart';
 import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
+import 'package:stepp_app/data_models/stepp_place/add_stepp_place_model.dart';
 import 'package:stepp_app/providers/home/add_stepp_provider.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
-import 'package:stepp_app/widgets/home/add/image_gallery_panel.dart';
+import 'package:stepp_app/widgets/home/add/each_stepp_panel.dart';
 import 'package:video_player/video_player.dart';
 
-class AddSteppPage extends StatefulWidget {
-  const AddSteppPage({Key? key}) : super(key: key);
+class AddEachSteppPage extends StatefulWidget {
+  const AddEachSteppPage({
+    Key? key,
+    required this.eachStepp,
+  }) : super(key: key);
 
-
+  final EachStepp eachStepp;
 
   @override
-  State<AddSteppPage> createState() => _AddSteppPageState();
+  State<AddEachSteppPage> createState() => _AddEachSteppPageState();
 }
 
-class _AddSteppPageState extends State<AddSteppPage> {
+class _AddEachSteppPageState extends State<AddEachSteppPage> {
   VideoPlayerController? _videoPlayerController;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -61,62 +62,77 @@ class _AddSteppPageState extends State<AddSteppPage> {
         builder: (context, value, child) {
           return SlidingUpPanel(
             color: Colors.transparent,
-            panel: const ImageGalleryPanel(),
+            panel: EachSteppPanel(
+              eachStepp: widget.eachStepp,
+            ),
             body: Stack(
               children: [
                 _buildCover(),
                 SafeArea(
-                  child: Container(
-                    margin: Sizes.allSidePaddingBig,
-                    padding: Sizes.allSidePaddingMedium,
-                    decoration: BoxDecoration(
-                      borderRadius: Sizes.allRoundBorderMedium,
-                      color: Colors.black.withOpacity(AppTheme.opacity80Percent),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Flexible(
-                          child: PhosphorIcon(
-                            PhosphorIcons.mapPin(
-                              PhosphorIconsStyle.fill,
-                            ),
-                            color: Colors.white,
-                          ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        icon: const Icon(
+                          Icons.chevron_left_outlined,
+                          color: Colors.white,
                         ),
-                        const SizedBox(
-                          width: Sizes.spacing10,
+                      ),
+                      Container(
+                        margin: Sizes.allSidePaddingMediumSmall,
+                        padding: Sizes.allSidePaddingMedium,
+                        decoration: BoxDecoration(
+                          borderRadius: Sizes.allRoundBorderSmall,
+                          color: Colors.black.withOpacity(AppTheme.opacity80Percent),
                         ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(
-                              value.currentAddStepp?.steppTitle ?? UiStrings.emptyLabel,
-                              style: context.textTheme.bodyLarge!.copyWith(
+                            Flexible(
+                              child: PhosphorIcon(
+                                PhosphorIcons.mapPin(
+                                  PhosphorIconsStyle.fill,
+                                ),
                                 color: Colors.white,
                               ),
                             ),
-                            Row(
+                            const SizedBox(
+                              width: Sizes.spacing10,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  HomePageUiStrings.selectPlacePrompt(
-                                    value.currentAddStepp?.place?.placeTitle ?? UiStrings.emptyLabel,
-                                  ),
-                                  style: context.textTheme.bodySmall!.copyWith(
+                                  value.currentAddStepp?.steppTitle ?? UiStrings.emptyLabel,
+                                  style: context.textTheme.bodyLarge!.copyWith(
                                     color: Colors.white,
                                   ),
-                                )
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      HomePageUiStrings.selectPlacePrompt(
+                                        value.currentAddStepp?.place?.placeTitle ?? UiStrings.emptyLabel,
+                                      ),
+                                      style: context.textTheme.bodySmall!.copyWith(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ],
-                            ),
+                            )
                           ],
-                        )
-                      ],
-                    ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                
               ],
             ),
           );
@@ -128,7 +144,7 @@ class _AddSteppPageState extends State<AddSteppPage> {
   Widget _buildCover() {
     return Consumer<AddSteppProvider>(
       builder: (context, value, child) {
-        if (value.currentEntity != null) {
+        if (value.currentEntity != null || widget.eachStepp.image != null) {
           switch (value.currentEntity!.type) {
             case AssetType.image:
               _disposeVideoController();
