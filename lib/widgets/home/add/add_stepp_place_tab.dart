@@ -10,7 +10,7 @@ import 'package:stepp_app/constants/routes.dart';
 import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
 import 'package:stepp_app/data_models/stepp_place/add_stepp_place_model.dart';
-import 'package:stepp_app/providers/home/add_stepp_provider.dart';
+import 'package:stepp_app/providers/home/add_stepp_place_provider.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/custom_opacity_button.dart';
 import 'package:stepp_app/widgets/custom_text_field.dart';
@@ -29,7 +29,7 @@ class _AddSteppPlaceTabState extends State<AddSteppPlaceTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AddSteppProvider>(
+    return Consumer<AddSteppPlaceProvider>(
       builder: (context, value, child) {
         return Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,7 +82,7 @@ class _AddSteppPlaceTabState extends State<AddSteppPlaceTab> {
                         context,
                         RouteNames.addEachSteppPage,
                         arguments: {
-                          RouteParameters.addSteppProvider: Provider.of<AddSteppProvider>(context, listen: false),
+                          RouteParameters.addSteppProvider: Provider.of<AddSteppPlaceProvider>(context, listen: false),
                         },
                       );
                     } else {
@@ -108,7 +108,7 @@ class _AddSteppPlaceTabState extends State<AddSteppPlaceTab> {
   }
 
   Widget _buildCreatePostTitle() {
-    return Consumer<AddSteppProvider>(
+    return Consumer<AddSteppPlaceProvider>(
       builder: (context, value, child) {
         return Expanded(
           child: Form(
@@ -182,7 +182,7 @@ class _AddSteppPlaceTabState extends State<AddSteppPlaceTab> {
   }
 
   Widget _buildSearchPlace() {
-    return Consumer<AddSteppProvider>(
+    return Consumer<AddSteppPlaceProvider>(
       builder: (context, value, child) {
         return Expanded(
           child: Column(

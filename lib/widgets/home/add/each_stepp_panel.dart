@@ -10,7 +10,7 @@ import 'package:stepp_app/constants/home/home_page_ui_strings.dart';
 import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
 import 'package:stepp_app/data_models/stepp_place/add_stepp_place_model.dart';
-import 'package:stepp_app/providers/home/add_stepp_provider.dart';
+import 'package:stepp_app/providers/home/add_stepp_place_provider.dart';
 import 'package:stepp_app/providers/image_gallery_provider.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
@@ -44,7 +44,7 @@ class _EachSteppPanelState extends State<EachSteppPanel> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AddSteppProvider>(
+    return Consumer<AddSteppPlaceProvider>(
       builder: (context, addSteppProvider, child) => Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
@@ -158,7 +158,7 @@ class _EachSteppPanelState extends State<EachSteppPanel> {
   }
 
   Widget _buildAfterSelectImage() {
-    return Consumer<AddSteppProvider>(
+    return Consumer<AddSteppPlaceProvider>(
       builder: (context, value, child) {
         return Expanded(
           child: Column(

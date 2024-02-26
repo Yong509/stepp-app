@@ -5,7 +5,7 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:stepp_app/constants/home/home_page_size.dart';
 import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/pages/home/feed/feed_page.dart';
-import 'package:stepp_app/providers/home/add_stepp_provider.dart';
+import 'package:stepp_app/providers/home/add_stepp_place_provider.dart';
 import 'package:stepp_app/providers/home/home_provider.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/widgets/home/add/add_stepp_panel.dart';
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
           ),
           panelBuilder: (scrollController) {
             return ChangeNotifierProvider(
-              create: (context) => AddSteppProvider(panelScrollController: scrollController),
+              create: (context) => AddSteppPlaceProvider(panelScrollController: scrollController),
               builder: (context, child) => const AddSteppPanel(),
             );
           },

@@ -3,8 +3,8 @@ import 'package:photo_manager/photo_manager.dart';
 import 'package:stepp_app/constants/mock_data.dart';
 import 'package:stepp_app/data_models/stepp_place/add_stepp_place_model.dart';
 
-class AddSteppProvider extends ChangeNotifier {
-  AddSteppProvider({this.panelScrollController});
+class AddSteppPlaceProvider extends ChangeNotifier {
+  AddSteppPlaceProvider({this.panelScrollController});
   final ScrollController? panelScrollController;
 
   AddSteppPlaceModel? _currentAddStepp;

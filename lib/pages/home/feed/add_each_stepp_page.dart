@@ -9,7 +9,7 @@ import 'package:stepp_app/constants/home/home_page_ui_strings.dart';
 import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
 import 'package:stepp_app/data_models/stepp_place/add_stepp_place_model.dart';
-import 'package:stepp_app/providers/home/add_stepp_provider.dart';
+import 'package:stepp_app/providers/home/add_stepp_place_provider.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/home/add/each_stepp_panel.dart';
@@ -58,7 +58,7 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<AddSteppProvider>(
+      body: Consumer<AddSteppPlaceProvider>(
         builder: (context, value, child) {
           return SlidingUpPanel(
             color: Colors.transparent,
@@ -142,7 +142,7 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
   }
 
   Widget _buildCover() {
-    return Consumer<AddSteppProvider>(
+    return Consumer<AddSteppPlaceProvider>(
       builder: (context, value, child) {
         if (value.currentEntity != null || widget.eachStepp.image != null) {
           switch (value.currentEntity!.type) {
