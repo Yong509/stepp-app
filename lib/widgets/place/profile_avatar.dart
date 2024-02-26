@@ -42,7 +42,7 @@ class ProfileAvatar extends StatelessWidget {
                 const SizedBox(
                   height: Sizes.spacing10,
                 ),
-                CustomOpacityButton(
+                CustomButton(
                   padding: SteppPlaceSize.steppPlaceFollowButtonPadding,
                   child: Text(
                     UiStrings.commonFollow,

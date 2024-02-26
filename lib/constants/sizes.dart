@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Sizes {
+  static const spacing0 = 0.0;
+  static const spacing5 = 5.0;
   static const spacing10 = 10.0;
+  static const spacing15 = 15.0;
+
   static const horizontalPaddingTiny = EdgeInsets.symmetric(horizontal: 3.0);
   static const horizontalPaddingSmall = EdgeInsets.symmetric(horizontal: 4.0);
   static const horizontalPaddingMediumSmall = EdgeInsets.symmetric(horizontal: 8.0);
@@ -42,6 +46,8 @@ class Sizes {
   static const onlyLeftPaddingSmall = EdgeInsets.only(left: 8.0);
   static const onlyLeftPaddingMidSize = EdgeInsets.only(left: 12.0);
   static const onlyLeftPaddingMedium = EdgeInsets.only(left: 16.0);
+  static const onlyLeftPaddingBig = EdgeInsets.only(left: 30.0);
+  static const onlyLeftPaddingHuge = EdgeInsets.only(left: 48.0);
   static const onlyTopPaddingLittle = EdgeInsets.only(top: 4.0);
   static const onlyTopPaddingSmall = EdgeInsets.only(top: 8.0);
   static const onlyTopPaddingMedium = EdgeInsets.only(top: 10.0);
@@ -53,8 +59,8 @@ class Sizes {
   static const onlyRightPaddingMidSize = EdgeInsets.only(right: 8.0);
   static const onlyRightPaddingMedium = EdgeInsets.only(right: 10.0);
   static const onlyRightPaddingMediumLarge = EdgeInsets.only(right: 12.0);
-  static const onlyRightPaddingBig = EdgeInsets.only(right: 16.0);
-  static const onlyRightPaddingHuge = EdgeInsets.only(right: 26.0);
+  static const onlyRightPaddingBig = EdgeInsets.only(right: 30.0);
+  static const onlyRightPaddingHuge = EdgeInsets.only(right: 48.0);
   static const onlyBottomPaddingTiny = EdgeInsets.only(bottom: 2.0);
   static const onlyBottomPaddingLittle = EdgeInsets.only(bottom: 4.0);
   static const onlyBottomPaddingSmall = EdgeInsets.only(bottom: 8.0);
@@ -69,6 +75,10 @@ class Sizes {
   static const borderWidthMedium = 1.0;
   static const borderWidthBig = 2.0;
   static const borderRadiusTiny = 4.0;
+  static const borderRadiusSmall = 8.0;
+  static const borderRadiusMedium = 16.0;
+  static const borderRadiusBig = 20.0;
+  
   static const tileButtonMinimumWidth = 9.0;
   static const tileButtonMinimumHeight = 5.0;
   static const tileButtonElevation = 2.0;
@@ -77,8 +87,8 @@ class Sizes {
   static const notificationTimeRowSpace = 10.0;
   static const notificationTimeCustomButtonWidthFraction = 0.30;
 
-  static const allRoundBorderSmall = BorderRadius.all(Radius.circular(8.0));
-  static const allRoundBorderMedium = BorderRadius.all(Radius.circular(16.0));
+  static const allRoundBorderSmall = BorderRadius.all(Radius.circular(10.0));
+  static const allRoundBorderMedium = BorderRadius.all(Radius.circular(20.0));
 
   static const allRoundBorderExtraLarge = BorderRadius.all(Radius.circular(50.0));
 
@@ -104,4 +114,5 @@ class Sizes {
 
   static const preferredSizeMax = 4.0;
   static const preferredSizeHeightAppBar = 1.0;
+
 }

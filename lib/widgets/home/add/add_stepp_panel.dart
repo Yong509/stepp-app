@@ -16,11 +16,11 @@ class _AddSteppPanelState extends State<AddSteppPanel> {
     return Container(
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.horizontal(
-          left: HomePageSize.addSteppPanelBorderRadius,
-          right: HomePageSize.addSteppPanelBorderRadius,
+        borderRadius: const BorderRadius.only(
+          topLeft: HomePageSize.addSteppPanelBorderRadius,
+          topRight: HomePageSize.addSteppPanelBorderRadius,
         ),
-        color: Colors.black.withOpacity(AppTheme.opacity80Percent),
+        color: Colors.black.withOpacity(AppTheme.opacity90Percent),
       ),
       child: const Padding(
         padding: HomePageSize.addSteppPanelPadding,

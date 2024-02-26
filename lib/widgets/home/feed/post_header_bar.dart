@@ -29,7 +29,7 @@ class PostHeaderBar extends StatelessWidget {
         ),
         Row(
           children: [
-            CustomOpacityButton(
+            CustomButton(
               padding: SteppPlaceSize.steppPlaceFollowButtonPadding,
               child: Text(
                 UiStrings.commonFollow,
