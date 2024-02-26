@@ -87,7 +87,7 @@ class Sizes {
   static const notificationTimeRowSpace = 10.0;
   static const notificationTimeCustomButtonWidthFraction = 0.30;
 
-  static const allRoundBorderSmall = BorderRadius.all(Radius.circular(8.0));
+  static const allRoundBorderSmall = BorderRadius.all(Radius.circular(10.0));
   static const allRoundBorderMedium = BorderRadius.all(Radius.circular(20.0));
 
   static const allRoundBorderExtraLarge = BorderRadius.all(Radius.circular(50.0));

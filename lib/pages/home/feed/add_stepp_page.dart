@@ -1,12 +1,18 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:stepp_app/constants/home/home_page_ui_strings.dart';
 import 'package:stepp_app/constants/sizes.dart';
+import 'package:stepp_app/constants/ui_strings.dart';
 import 'package:stepp_app/providers/home/add_stepp_provider.dart';
 import 'package:stepp_app/styles/app_theme.dart';
+import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/home/add/image_gallery_panel.dart';
 import 'package:video_player/video_player.dart';
 
@@ -59,17 +65,58 @@ class _AddSteppPageState extends State<AddSteppPage> {
             body: Stack(
               children: [
                 _buildCover(),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(AppTheme.opacity80Percent),
-                    borderRadius: BorderRadius.circular(
-                      Sizes.borderRadiusBig,
+                SafeArea(
+                  child: Container(
+                    margin: Sizes.allSidePaddingBig,
+                    padding: Sizes.allSidePaddingMedium,
+                    decoration: BoxDecoration(
+                      borderRadius: Sizes.allRoundBorderMedium,
+                      color: Colors.black.withOpacity(AppTheme.opacity80Percent),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Flexible(
+                          child: PhosphorIcon(
+                            PhosphorIcons.mapPin(
+                              PhosphorIconsStyle.fill,
+                            ),
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: Sizes.spacing10,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              value.currentAddStepp?.steppTitle ?? UiStrings.emptyLabel,
+                              style: context.textTheme.bodyLarge!.copyWith(
+                                color: Colors.white,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  HomePageUiStrings.selectPlacePrompt(
+                                    value.currentAddStepp?.place?.placeTitle ?? UiStrings.emptyLabel,
+                                  ),
+                                  style: context.textTheme.bodySmall!.copyWith(
+                                    color: Colors.white,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        )
+                      ],
                     ),
                   ),
-                  child: Text(
-                    value.currentAddStepp?.place?.placeTitle ?? "Empty",
-                  ),
-                )
+                ),
+                
               ],
             ),
           );
@@ -86,7 +133,7 @@ class _AddSteppPageState extends State<AddSteppPage> {
             case AssetType.image:
               _disposeVideoController();
               return Container(
-                color: Colors.black,
+                color: AppTheme.black900,
                 child: Center(
                   child: AssetEntityImage(
                     value.currentEntity!,
@@ -101,7 +148,7 @@ class _AddSteppPageState extends State<AddSteppPage> {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     return Container(
-                      color: Colors.black,
+                      color: AppTheme.black900,
                       child: Center(
                         child: AspectRatio(
                           key: ValueKey(value.currentEntity!.id),
@@ -127,10 +174,14 @@ class _AddSteppPageState extends State<AddSteppPage> {
                 },
               );
             default:
-              return const SizedBox();
+              return Container(
+                color: AppTheme.black900,
+              );
           }
         }
-        return const SizedBox();
+        return Container(
+          color: AppTheme.black900,
+        );
       },
     );
   }

@@ -15,7 +15,7 @@ class Routes {
         ),
     RouteNames.previewAddStepp: (context) {
       final Map args = ModalRoute.of(context)!.settings.arguments as Map;
-      final AddSteppProvider addSteppProvider = args[RouteParameters.addSteppProvider] as AddSteppProvider;
+      final AddSteppProvider addSteppProvider = args[RouteParameters.addSteppProvider];
       return MultiProvider(
         providers: [
           Provider(create: (context) => ImageGalleryService()),
