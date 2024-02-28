@@ -82,7 +82,7 @@ class _PageLayoutState extends State<PageLayout> {
             ),
       ),
       titleSpacing: widget.titleSpacing,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       actions: widget.actions,
       backButtonText: widget.backButtonText,
       bottom: widget.appbarBottom,
@@ -110,7 +110,8 @@ class _PageLayoutState extends State<PageLayout> {
                 label: UiStrings.emptyLabel,
               ))
           .toList(),
-      unselectedItemColor: theme.colorScheme.onBackground.withAlpha(AppTheme.alpha36Percent),
+      unselectedItemColor:
+          theme.colorScheme.onBackground.withAlpha(AppTheme.alpha36Percent),
       selectedItemColor: Colors.black,
       showSelectedLabels: false,
       showUnselectedLabels: false,
@@ -128,13 +129,14 @@ class _PageLayoutState extends State<PageLayout> {
     final appBarHeight = _buildAppBarSection(context).preferredSize.height;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      extendBodyBehindAppBar: true,
       appBar: widget.showAppBar ? _buildAppBarSection(context) : null,
       body: Container(
         color: Colors.white,
         padding: widget.hasTopPadding
             ? EdgeInsets.only(
-                top: statusBarHeight + appBarHeight + Sizes.appPageTemplateTopPadding,
+                top: statusBarHeight +
+                    appBarHeight +
+                    Sizes.appPageTemplateTopPadding,
               )
             : EdgeInsets.zero,
         child: widget.body[selectedIndex],
@@ -142,17 +144,18 @@ class _PageLayoutState extends State<PageLayout> {
       floatingActionButton: widget.floatingActionButton,
       floatingActionButtonLocation: widget.floatingActionButtonLocation,
       bottomSheet: widget.bottom,
-      bottomNavigationBar: widget.body.length == Sizes.appPageTemplateBottomNoneLength
-          ? null
-          : Theme(
-              data: ThemeData(
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-              ),
-              child: _buildBottomNavigationBarSection(
-                context,
-              ),
-            ),
+      bottomNavigationBar:
+          widget.body.length == Sizes.appPageTemplateBottomNoneLength
+              ? null
+              : Theme(
+                  data: ThemeData(
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                  ),
+                  child: _buildBottomNavigationBarSection(
+                    context,
+                  ),
+                ),
     );
   }
 }
