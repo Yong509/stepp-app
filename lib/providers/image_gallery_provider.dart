@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:stepp_app/services/image_gallery_service.dart';
+import 'dart:io' show Platform;
 
 class ImageGalleryProvider extends ChangeNotifier {
   ImageGalleryProvider(this.imageGalleryService) {
@@ -22,7 +23,11 @@ class ImageGalleryProvider extends ChangeNotifier {
 
   Future<void> initialGallery() async {
     final allAssets = await imageGalleryService.getAssets();
+    for (var element in allAssets) {
+      print("check ${element.name}");
+    }
     entities = filterCollections(allAssets);
+
     for (var element in entities!) {
       final entity = await imageGalleryService.loadAlbumAssets(element);
       assetEntity!.add(entity);
