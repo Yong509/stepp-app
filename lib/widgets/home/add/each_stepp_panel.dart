@@ -7,6 +7,7 @@ import 'package:stepp_app/constants/home/feed/post_box_size.dart';
 import 'package:stepp_app/constants/home/feed/post_box_ui_strings.dart';
 import 'package:stepp_app/constants/home/home_page_size.dart';
 import 'package:stepp_app/constants/home/home_page_ui_strings.dart';
+import 'package:stepp_app/constants/routes.dart';
 import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
 import 'package:stepp_app/data_models/stepp_place/add_stepp_place_model.dart';
@@ -217,6 +218,16 @@ class _EachSteppPanelState extends State<EachSteppPanel> {
                                 title: descriptionTextController.text,
                               ),
                               widget.eachStepp.id!,
+                            );
+                            Navigator.pushNamed(
+                              context,
+                              RouteNames.addEachSteppPage,
+                              arguments: {
+                                RouteParameters.addSteppProvider: Provider.of<AddSteppPlaceProvider>(
+                                  context,
+                                  listen: false,
+                                )
+                              },
                             );
                           },
                           child: Text(
