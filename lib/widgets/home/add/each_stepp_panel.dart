@@ -23,9 +23,11 @@ class EachSteppPanel extends StatefulWidget {
   const EachSteppPanel({
     Key? key,
     required this.eachStepp,
+    this.selectEntity,
   }) : super(key: key);
 
   final EachStepp eachStepp;
+  final Function(AssetEntity entity)? selectEntity;
 
   @override
   State<EachSteppPanel> createState() => _EachSteppPanelState();
@@ -150,6 +152,7 @@ class _EachSteppPanelState extends State<EachSteppPanel> {
                     selectEntity = entity;
                   });
                 }
+                widget.selectEntity!(entity!);
               },
             ),
           )
@@ -219,14 +222,14 @@ class _EachSteppPanelState extends State<EachSteppPanel> {
                               ),
                               widget.eachStepp.id!,
                             );
-                            Navigator.pushNamed(
-                              context,
+                            value.addEmptyEachStepp();
+                            Navigator.of(context).pushNamed(
                               RouteNames.addEachSteppPage,
                               arguments: {
                                 RouteParameters.addSteppProvider: Provider.of<AddSteppPlaceProvider>(
                                   context,
                                   listen: false,
-                                )
+                                ),
                               },
                             );
                           },

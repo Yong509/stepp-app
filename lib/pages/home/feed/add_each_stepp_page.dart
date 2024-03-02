@@ -29,6 +29,7 @@ class AddEachSteppPage extends StatefulWidget {
 
 class _AddEachSteppPageState extends State<AddEachSteppPage> {
   VideoPlayerController? _videoPlayerController;
+  AssetEntity? currentEntity;
 
   @override
   void initState() {
@@ -64,6 +65,11 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
             color: Colors.transparent,
             panel: EachSteppPanel(
               eachStepp: widget.eachStepp,
+              selectEntity: (entity) {
+                setState(() {
+                  currentEntity = entity;
+                });
+              },
             ),
             body: Stack(
               children: [
@@ -74,7 +80,21 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
                     children: [
                       IconButton(
                         onPressed: () {
-                          Navigator.of(context).pop();
+                          // int eachSteppIndex = value.currentAddStepp!.stepps!.indexOf(widget.eachStepp);
+                          // if (eachSteppIndex == 0) {
+                          //   showDialog(
+                          //     context: context,
+                          //     builder: (context) {
+                          //       return const DefaultDialog(
+                          //         body: [
+                          //           Text("If you go back now, your stepps will be discarded."),
+                          //         ],
+                          //       );
+                          //     },
+                          //   );
+                          // } else {
+                          //   Navigator.of(context).pop();
+                          // }
                         },
                         icon: const Icon(
                           Icons.chevron_left_outlined,
@@ -144,15 +164,15 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
   Widget _buildCover() {
     return Consumer<AddSteppPlaceProvider>(
       builder: (context, value, child) {
-        if (value.currentEntity != null || widget.eachStepp.image != null) {
-          switch (value.currentEntity!.type) {
+        if (currentEntity != null) {
+          switch (currentEntity!.type) {
             case AssetType.image:
               _disposeVideoController();
               return Container(
                 color: AppTheme.black900,
                 child: Center(
                   child: AssetEntityImage(
-                    value.currentEntity!,
+                    currentEntity!,
                     isOriginal: true,
                     filterQuality: FilterQuality.high,
                   ),
@@ -160,14 +180,14 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
               );
             case AssetType.video:
               return FutureBuilder(
-                future: _initializeAndPlayVideo(value.currentEntity!),
+                future: _initializeAndPlayVideo(currentEntity!),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     return Container(
                       color: AppTheme.black900,
                       child: Center(
                         child: AspectRatio(
-                          key: ValueKey(value.currentEntity!.id),
+                          key: ValueKey(currentEntity!.id),
                           aspectRatio: _videoPlayerController!.value.aspectRatio,
                           child: VideoPlayer(_videoPlayerController!),
                         ),

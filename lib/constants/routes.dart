@@ -27,7 +27,7 @@ class Routes {
           ChangeNotifierProvider.value(value: addSteppProvider)
         ],
         child: AddEachSteppPage(
-          eachStepp: addSteppProvider.currentAddStepp!.stepps!.first,
+          eachStepp: addSteppProvider.currentAddStepp!.stepps!.last,
         ),
       );
     }

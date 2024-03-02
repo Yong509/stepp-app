@@ -37,7 +37,8 @@ class AddSteppPlaceProvider extends ChangeNotifier {
   }
 
   void setEachStepp(EachStepp stepp, String id) {
-    final index = _currentAddStepp?.stepps?.indexWhere((element) => element.id == id);
+    final index =
+        _currentAddStepp?.stepps?.indexWhere((element) => element.id == id);
     if (index != null) {
       _currentAddStepp!.stepps![index]
         ..description = stepp.description
@@ -45,5 +46,10 @@ class AddSteppPlaceProvider extends ChangeNotifier {
         ..title = stepp.title;
       notifyListeners();
     }
+  }
+
+  void addEmptyEachStepp() {
+    _currentAddStepp!.stepps!.add(EachStepp());
+    notifyListeners();
   }
 }
