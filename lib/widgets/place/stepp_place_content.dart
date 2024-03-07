@@ -6,7 +6,7 @@ import 'package:stepp_app/constants/ui_strings.dart';
 import 'package:stepp_app/providers/stepp_place_provider.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
-import 'package:stepp_app/widgets/custom_opacity_button.dart';
+import 'package:stepp_app/widgets/custom_button.dart';
 import 'package:stepp_app/widgets/custom_opacity_tile.dart';
 import 'package:stepp_app/widgets/place/profile_avatar.dart';
 import 'package:stepp_app/widgets/place/stepp_place_panel.dart';

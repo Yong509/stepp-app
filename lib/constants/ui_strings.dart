@@ -8,6 +8,7 @@ class UiStrings {
   static const wherehintText = "Where ... ?";
   static const addImgOrVDOPlaceholder = "Add a IMG/VDO from albums";
   static const whatIsThisStepHintText = "What is this stepp ... ?";
+  static const commonDone = "Done";
 
   // Validator
   static const digitOnly = 'Digit only';

@@ -78,7 +78,7 @@ class Sizes {
   static const borderRadiusSmall = 8.0;
   static const borderRadiusMedium = 16.0;
   static const borderRadiusBig = 20.0;
-  
+
   static const tileButtonMinimumWidth = 9.0;
   static const tileButtonMinimumHeight = 5.0;
   static const tileButtonElevation = 2.0;
@@ -86,6 +86,11 @@ class Sizes {
   static const toggleSwitchTextLengthFraction = 0.65;
   static const notificationTimeRowSpace = 10.0;
   static const notificationTimeCustomButtonWidthFraction = 0.30;
+
+  static const topRoundBorderRadiusMedium = BorderRadius.only(
+    topLeft: Radius.circular(20),
+    topRight: Radius.circular(20),
+  );
 
   static const allRoundBorderSmall = BorderRadius.all(Radius.circular(10.0));
   static const allRoundBorderMedium = BorderRadius.all(Radius.circular(20.0));
@@ -114,5 +119,4 @@ class Sizes {
 
   static const preferredSizeMax = 4.0;
   static const preferredSizeHeightAppBar = 1.0;
-
 }

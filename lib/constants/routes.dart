@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:stepp_app/pages/home/feed/add_cover_stepp_page.dart';
 import 'package:stepp_app/pages/home/feed/add_each_stepp_page.dart';
 import 'package:stepp_app/pages/place/stepp_place_page.dart';
 import 'package:stepp_app/providers/home/add_stepp_place_provider.dart';
@@ -18,7 +19,6 @@ class Routes {
       final AddSteppPlaceProvider addSteppProvider = args[RouteParameters.addSteppProvider];
       return MultiProvider(
         providers: [
-          Provider(create: (context) => ImageGalleryService()),
           ChangeNotifierProvider(
             create: (context) => ImageGalleryProvider(
               Provider.of<ImageGalleryService>(context, listen: false),
@@ -27,8 +27,18 @@ class Routes {
           ChangeNotifierProvider.value(value: addSteppProvider)
         ],
         child: AddEachSteppPage(
-          eachStepp: addSteppProvider.currentAddStepp!.stepps!.first,
+          eachStepp: addSteppProvider.currentAddStepp!.stepps!.last,
         ),
+      );
+    },
+    RouteNames.addCoverPage: (context) {
+      return ChangeNotifierProvider(
+        create: (context) => ImageGalleryProvider(
+          Provider.of<ImageGalleryService>(context, listen: false),
+        ),
+        builder: (context, child) {
+          return const AddCoverPage();
+        },
       );
     }
   };
@@ -37,6 +47,7 @@ class Routes {
 class RouteNames {
   static const steppPlace = "steppPlace";
   static const addEachSteppPage = "addEachSteppPage";
+  static const addCoverPage = "addCoverPage";
 }
 
 class RouteParameters {

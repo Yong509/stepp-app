@@ -6,7 +6,7 @@ import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
 import 'package:stepp_app/providers/stepp_place_provider.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
-import 'package:stepp_app/widgets/custom_opacity_button.dart';
+import 'package:stepp_app/widgets/custom_button.dart';
 
 class ProfileAvatar extends StatelessWidget {
   const ProfileAvatar({super.key});

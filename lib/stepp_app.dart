@@ -5,6 +5,7 @@ import 'package:stepp_app/constants/routes.dart';
 import 'package:stepp_app/pages/home/home_page.dart';
 import 'package:stepp_app/providers/home/home_provider.dart';
 import 'package:stepp_app/services/http_client_service.dart';
+import 'package:stepp_app/services/image_gallery_service.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 
 class SteppApp extends StatefulWidget {
@@ -19,6 +20,7 @@ class _SteppAppState extends State<SteppApp> {
     final httpClientService = HttpClientService();
     return [
       Provider<HttpClientService>.value(value: httpClientService),
+      Provider<ImageGalleryService>.value(value: ImageGalleryService()),
       ChangeNotifierProvider(create: (context) => HomeProvider()),
     ];
   }

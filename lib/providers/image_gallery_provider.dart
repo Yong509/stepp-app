@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:stepp_app/services/image_gallery_service.dart';
@@ -16,12 +17,7 @@ class ImageGalleryProvider extends ChangeNotifier {
     PMDarwinAssetCollectionSubtype.smartAlbumUserLibrary,
     PMDarwinAssetCollectionSubtype.smartAlbumVideos,
   ];
-  List<String> desiredSubtypesAndroid = [
-    "Recent",
-    "Pictures",
-    "Downlaod",
-    "Videos"
-  ];
+  List<String> desiredSubtypesAndroid = ["Recent", "Pictures", "Downlaod", "Videos"];
 
   List<List<AssetEntity>>? createSteppAssetEntity = [];
 
@@ -46,8 +42,7 @@ class ImageGalleryProvider extends ChangeNotifier {
       }).toList();
     } else if (Platform.isIOS) {
       return allAssets.where((element) {
-        return element.darwinSubtype != null &&
-                desiredSubtypesIOS.contains(element.darwinSubtype!) ||
+        return element.darwinSubtype != null && desiredSubtypesIOS.contains(element.darwinSubtype!) ||
             element.darwinType == PMDarwinAssetCollectionType.album;
       }).toList();
     }

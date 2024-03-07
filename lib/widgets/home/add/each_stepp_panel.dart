@@ -7,6 +7,7 @@ import 'package:stepp_app/constants/home/feed/post_box_size.dart';
 import 'package:stepp_app/constants/home/feed/post_box_ui_strings.dart';
 import 'package:stepp_app/constants/home/home_page_size.dart';
 import 'package:stepp_app/constants/home/home_page_ui_strings.dart';
+import 'package:stepp_app/constants/routes.dart';
 import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
 import 'package:stepp_app/data_models/stepp_place/add_stepp_place_model.dart';
@@ -14,7 +15,7 @@ import 'package:stepp_app/providers/home/add_stepp_place_provider.dart';
 import 'package:stepp_app/providers/image_gallery_provider.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
-import 'package:stepp_app/widgets/custom_opacity_button.dart';
+import 'package:stepp_app/widgets/custom_button.dart';
 import 'package:stepp_app/widgets/custom_text_field.dart';
 import 'package:stepp_app/widgets/home/add/image_gallery_grid.dart';
 
@@ -22,9 +23,11 @@ class EachSteppPanel extends StatefulWidget {
   const EachSteppPanel({
     Key? key,
     required this.eachStepp,
+    this.selectEntity,
   }) : super(key: key);
 
   final EachStepp eachStepp;
+  final Function(AssetEntity entity)? selectEntity;
 
   @override
   State<EachSteppPanel> createState() => _EachSteppPanelState();
@@ -149,6 +152,7 @@ class _EachSteppPanelState extends State<EachSteppPanel> {
                     selectEntity = entity;
                   });
                 }
+                widget.selectEntity!(entity!);
               },
             ),
           )
@@ -217,6 +221,16 @@ class _EachSteppPanelState extends State<EachSteppPanel> {
                                 title: descriptionTextController.text,
                               ),
                               widget.eachStepp.id!,
+                            );
+                            value.addEmptyEachStepp();
+                            Navigator.of(context).pushNamed(
+                              RouteNames.addEachSteppPage,
+                              arguments: {
+                                RouteParameters.addSteppProvider: Provider.of<AddSteppPlaceProvider>(
+                                  context,
+                                  listen: false,
+                                ),
+                              },
                             );
                           },
                           child: Text(
