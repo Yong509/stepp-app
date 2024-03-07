@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:stepp_app/constants/home/feed/add_cover_stepp_page_sizes.dart';
 import 'package:stepp_app/constants/home/feed/add_cover_stepp_page_ui_strings.dart';
-import 'package:stepp_app/constants/home/home_page_size.dart';
+import 'package:stepp_app/constants/place/stepp_place_ui_strings.dart';
 import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
 import 'package:stepp_app/styles/app_theme.dart';
@@ -73,7 +72,7 @@ class _AddCoverPageState extends State<AddCoverPage> {
             child: CustomButton(
               backgroundColor: Colors.black.withOpacity(AppTheme.opacity85Percent),
               child: Text(
-                "Preview",
+                AddCoverSteppUiStrings.preview,
                 style: context.textTheme.bodySmall!.copyWith(
                   color: Colors.white,
                 ),
@@ -91,8 +90,25 @@ class _AddCoverPageState extends State<AddCoverPage> {
           ),
           child: Column(
             children: [
+              Padding(
+                padding: Sizes.allSidePaddingMedium,
+                child: Row(
+                  children: [
+                    const CircleAvatar(
+                      backgroundImage: AssetImage('assets/images/avatar.png'),
+                      radius: Sizes.profilePictureRadiusSmall,
+                    ),
+                    const SizedBox(
+                      width: Sizes.spacing15,
+                    ),
+                    Text(
+                      SteppPlaceUIStrings.steppPlaceMockProfileName,
+                      style: context.textTheme.bodyMedium!.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+              ),
               Container(
-                padding: Sizes.onlyTopPaddingHuge,
                 decoration: const BoxDecoration(
                   borderRadius: Sizes.allRoundBorderMedium,
                 ),
@@ -108,29 +124,32 @@ class _AddCoverPageState extends State<AddCoverPage> {
 
   Widget _buildBeforeSelectImage() {
     return Expanded(
-      child: Column(
-        children: [
-          Text(
-            UiStrings.addImgOrVDOPlaceholder,
-            style: context.textTheme.bodyMedium!.copyWith(
-              color: Colors.white,
+      child: Padding(
+        padding: Sizes.onlyTopPaddingMedium,
+        child: Column(
+          children: [
+            Text(
+              UiStrings.addImgOrVDOPlaceholder,
+              style: context.textTheme.bodyMedium!.copyWith(
+                color: Colors.white,
+              ),
             ),
-          ),
-          const SizedBox(
-            height: HomePageSize.addSteppInputGallerySpace,
-          ),
-          Expanded(
-            child: ImageGalleryGrid(
-              isSelect: (entity) {
-                if (entity != null) {
-                  setState(() {
-                    currentEntity = entity;
-                  });
-                }
-              },
+            const SizedBox(
+              height: Sizes.spacing5,
             ),
-          )
-        ],
+            Expanded(
+              child: ImageGalleryGrid(
+                isSelect: (entity) {
+                  if (entity != null) {
+                    setState(() {
+                      currentEntity = entity;
+                    });
+                  }
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -139,15 +158,17 @@ class _AddCoverPageState extends State<AddCoverPage> {
     if (currentEntity != null) {
       switch (currentEntity!.type) {
         case AssetType.image:
-          return SizedBox(
-            height: AddCoverSteppPageSizes.coverImageSizes(context.deviceSize.height),
-            child: ClipRRect(
-              borderRadius: Sizes.allRoundBorderMedium,
+          return ClipRRect(
+            borderRadius: Sizes.allRoundBorderMedium,
+            child: Container(
+              width: double.infinity,
+              height: AddCoverSteppPageSizes.coverImageSizes(context.deviceSize.height),
+              color: AppTheme.black900,
               child: AssetEntityImage(
                 currentEntity!,
                 isOriginal: true,
                 filterQuality: FilterQuality.high,
-                fit: BoxFit.cover,
+                fit: BoxFit.fitHeight,
               ),
             ),
           );
@@ -157,7 +178,11 @@ class _AddCoverPageState extends State<AddCoverPage> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return Container(
-                  color: AppTheme.black900,
+                  height: AddCoverSteppPageSizes.coverImageSizes(context.deviceSize.height),
+                  decoration: const BoxDecoration(
+                    color: AppTheme.black900,
+                    borderRadius: Sizes.allRoundBorderMedium,
+                  ),
                   child: Center(
                     child: AspectRatio(
                       key: ValueKey(currentEntity!.id),
@@ -167,16 +192,23 @@ class _AddCoverPageState extends State<AddCoverPage> {
                   ),
                 );
               }
-              return Skeletonizer(
-                effect: ShimmerEffect(
-                  baseColor: AppTheme.black900,
-                  highlightColor: AppTheme.black900.withAlpha(AppTheme.alpha8Percent),
-                ),
-                containersColor: AppTheme.black900,
-                child: const Card(
-                  margin: EdgeInsets.zero,
-                  shape: OutlineInputBorder(
-                    borderRadius: BorderRadius.zero,
+              return ClipRRect(
+                borderRadius: Sizes.allRoundBorderMedium,
+                child: Skeletonizer(
+                  effect: ShimmerEffect(
+                    baseColor: AppTheme.black900,
+                    highlightColor: AppTheme.black900.withAlpha(AppTheme.alpha8Percent),
+                  ),
+                  containersColor: AppTheme.black900,
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: AddCoverSteppPageSizes.coverImageSizes(context.deviceSize.height),
+                    child: const Card(
+                      margin: EdgeInsets.zero,
+                      shape: OutlineInputBorder(
+                        borderRadius: BorderRadius.zero,
+                      ),
+                    ),
                   ),
                 ),
               );
@@ -184,6 +216,7 @@ class _AddCoverPageState extends State<AddCoverPage> {
           );
         default:
           return Container(
+            height: AddCoverSteppPageSizes.coverImageSizes(context.deviceSize.height),
             color: AppTheme.black900,
           );
       }
