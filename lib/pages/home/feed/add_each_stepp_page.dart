@@ -6,12 +6,14 @@ import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:stepp_app/constants/home/home_page_ui_strings.dart';
+import 'package:stepp_app/constants/routes.dart';
 import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
 import 'package:stepp_app/data_models/stepp_place/add_stepp_place_model.dart';
 import 'package:stepp_app/providers/home/add_stepp_place_provider.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
+import 'package:stepp_app/widgets/custom_button.dart';
 import 'package:stepp_app/widgets/home/add/each_stepp_panel.dart';
 import 'package:video_player/video_player.dart';
 
@@ -59,104 +61,24 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<AddSteppPlaceProvider>(
-        builder: (context, value, child) {
-          return SlidingUpPanel(
-            color: Colors.transparent,
-            panel: EachSteppPanel(
-              eachStepp: widget.eachStepp,
-              selectEntity: (entity) {
-                setState(() {
-                  currentEntity = entity;
-                });
-              },
+      body: SlidingUpPanel(
+        color: Colors.transparent,
+        panel: EachSteppPanel(
+          eachStepp: widget.eachStepp,
+          selectEntity: (entity) {
+            setState(() {
+              currentEntity = entity;
+            });
+          },
+        ),
+        body: Stack(
+          children: [
+            _buildCover(),
+            SafeArea(
+              child: _buildAppBar(),
             ),
-            body: Stack(
-              children: [
-                _buildCover(),
-                SafeArea(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          // int eachSteppIndex = value.currentAddStepp!.stepps!.indexOf(widget.eachStepp);
-                          // if (eachSteppIndex == 0) {
-                          //   showDialog(
-                          //     context: context,
-                          //     builder: (context) {
-                          //       return const DefaultDialog(
-                          //         body: [
-                          //           Text("If you go back now, your stepps will be discarded."),
-                          //         ],
-                          //       );
-                          //     },
-                          //   );
-                          // } else {
-                          //   Navigator.of(context).pop();
-                          // }
-                        },
-                        icon: const Icon(
-                          Icons.chevron_left_outlined,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Container(
-                        margin: Sizes.allSidePaddingMediumSmall,
-                        padding: Sizes.allSidePaddingMedium,
-                        decoration: BoxDecoration(
-                          borderRadius: Sizes.allRoundBorderSmall,
-                          color: Colors.black.withOpacity(AppTheme.opacity80Percent),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Flexible(
-                              child: PhosphorIcon(
-                                PhosphorIcons.mapPin(
-                                  PhosphorIconsStyle.fill,
-                                ),
-                                color: Colors.white,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: Sizes.spacing10,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  value.currentAddStepp?.steppTitle ?? UiStrings.emptyLabel,
-                                  style: context.textTheme.bodyLarge!.copyWith(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      HomePageUiStrings.selectPlacePrompt(
-                                        value.currentAddStepp?.place?.placeTitle ?? UiStrings.emptyLabel,
-                                      ),
-                                      style: context.textTheme.bodySmall!.copyWith(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }
@@ -217,6 +139,110 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
         }
         return Container(
           color: AppTheme.black900,
+        );
+      },
+    );
+  }
+
+  Widget _buildAppBar() {
+    return Consumer<AddSteppPlaceProvider>(
+      builder: (context, value, child) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: const Icon(
+                    Icons.chevron_left_outlined,
+                    color: Colors.white,
+                  ),
+                ),
+                Container(
+                  margin: Sizes.allSidePaddingMediumSmall,
+                  padding: Sizes.allSidePaddingMedium,
+                  decoration: BoxDecoration(
+                    borderRadius: Sizes.allRoundBorderSmall,
+                    color: Colors.black.withOpacity(AppTheme.opacity80Percent),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Flexible(
+                        child: PhosphorIcon(
+                          PhosphorIcons.mapPin(
+                            PhosphorIconsStyle.fill,
+                          ),
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: Sizes.spacing10,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            value.currentAddStepp?.steppTitle ?? UiStrings.emptyLabel,
+                            style: context.textTheme.bodyLarge!.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                HomePageUiStrings.selectPlacePrompt(
+                                  value.currentAddStepp?.place?.placeTitle ?? UiStrings.emptyLabel,
+                                ),
+                                style: context.textTheme.bodySmall!.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: Sizes.onlyRightPaddingMediumLarge,
+              child: CustomButton(
+                onTap: () => Navigator.of(context).pushNamed(
+                  RouteNames.addCoverPage,
+                ),
+                padding: Sizes.allSidePaddingMediumSmall,
+                backgroundColor: Colors.black.withOpacity(AppTheme.opacity80Percent),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    PhosphorIcon(
+                      PhosphorIcons.check(),
+                      color: Colors.white,
+                      size: Sizes.iconSizeSmall,
+                    ),
+                    const SizedBox(
+                      width: Sizes.spacing10,
+                    ),
+                    Text(
+                      UiStrings.commonDone,
+                      style: context.textTheme.labelLarge!.copyWith(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
         );
       },
     );

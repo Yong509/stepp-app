@@ -4,7 +4,7 @@ import 'package:stepp_app/constants/place/stepp_place_ui_strings.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
-import 'package:stepp_app/widgets/custom_opacity_button.dart';
+import 'package:stepp_app/widgets/custom_button.dart';
 import 'package:stepp_app/widgets/custom_opacity_tile.dart';
 
 class SteppPlaceAppBar extends StatefulWidget {

@@ -16,6 +16,7 @@ class AppTheme {
   static const opacity36Percent = 0.36;
   static const opacity46Percent = 0.46;
   static const opacity80Percent = 0.8;
+  static const opacity85Percent = 0.85;
   static const opacity90Percent = 0.9;
 
   // Black

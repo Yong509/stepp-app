@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:stepp_app/pages/home/feed/add_cover_stepp_page.dart';
 import 'package:stepp_app/pages/home/feed/add_each_stepp_page.dart';
 import 'package:stepp_app/pages/place/stepp_place_page.dart';
 import 'package:stepp_app/providers/home/add_stepp_place_provider.dart';
@@ -30,6 +31,9 @@ class Routes {
           eachStepp: addSteppProvider.currentAddStepp!.stepps!.last,
         ),
       );
+    },
+    RouteNames.addCoverPage: (context) {
+      return const AddCoverPage();
     }
   };
 }
@@ -37,6 +41,7 @@ class Routes {
 class RouteNames {
   static const steppPlace = "steppPlace";
   static const addEachSteppPage = "addEachSteppPage";
+  static const addCoverPage = "addCoverPage";
 }
 
 class RouteParameters {
