@@ -5,10 +5,13 @@ import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:stepp_app/constants/home/feed/add_cover_stepp_page_sizes.dart';
 import 'package:stepp_app/constants/home/feed/add_cover_stepp_page_ui_strings.dart';
+import 'package:stepp_app/constants/home/home_page_size.dart';
 import 'package:stepp_app/constants/sizes.dart';
+import 'package:stepp_app/constants/ui_strings.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/custom_button.dart';
+import 'package:stepp_app/widgets/home/add/image_gallery_grid.dart';
 import 'package:video_player/video_player.dart';
 
 class AddCoverPage extends StatefulWidget {
@@ -95,9 +98,39 @@ class _AddCoverPageState extends State<AddCoverPage> {
                 ),
                 child: _buildCoverImage(),
               ),
+              _buildBeforeSelectImage()
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildBeforeSelectImage() {
+    return Expanded(
+      child: Column(
+        children: [
+          Text(
+            UiStrings.addImgOrVDOPlaceholder,
+            style: context.textTheme.bodyMedium!.copyWith(
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(
+            height: HomePageSize.addSteppInputGallerySpace,
+          ),
+          Expanded(
+            child: ImageGalleryGrid(
+              isSelect: (entity) {
+                if (entity != null) {
+                  setState(() {
+                    currentEntity = entity;
+                  });
+                }
+              },
+            ),
+          )
+        ],
       ),
     );
   }
@@ -106,10 +139,17 @@ class _AddCoverPageState extends State<AddCoverPage> {
     if (currentEntity != null) {
       switch (currentEntity!.type) {
         case AssetType.image:
-          return AssetEntityImage(
-            currentEntity!,
-            isOriginal: true,
-            filterQuality: FilterQuality.high,
+          return SizedBox(
+            height: AddCoverSteppPageSizes.coverImageSizes(context.deviceSize.height),
+            child: ClipRRect(
+              borderRadius: Sizes.allRoundBorderMedium,
+              child: AssetEntityImage(
+                currentEntity!,
+                isOriginal: true,
+                filterQuality: FilterQuality.high,
+                fit: BoxFit.cover,
+              ),
+            ),
           );
         case AssetType.video:
           return FutureBuilder(
@@ -150,7 +190,7 @@ class _AddCoverPageState extends State<AddCoverPage> {
     }
     return Container(
       height: AddCoverSteppPageSizes.coverImageSizes(context.deviceSize.height),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: Sizes.allRoundBorderMedium,
         color: AppTheme.black900,
       ),

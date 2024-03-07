@@ -19,7 +19,6 @@ class Routes {
       final AddSteppPlaceProvider addSteppProvider = args[RouteParameters.addSteppProvider];
       return MultiProvider(
         providers: [
-          Provider(create: (context) => ImageGalleryService()),
           ChangeNotifierProvider(
             create: (context) => ImageGalleryProvider(
               Provider.of<ImageGalleryService>(context, listen: false),
@@ -33,7 +32,14 @@ class Routes {
       );
     },
     RouteNames.addCoverPage: (context) {
-      return const AddCoverPage();
+      return ChangeNotifierProvider(
+        create: (context) => ImageGalleryProvider(
+          Provider.of<ImageGalleryService>(context, listen: false),
+        ),
+        builder: (context, child) {
+          return const AddCoverPage();
+        },
+      );
     }
   };
 }

@@ -1,3 +1,3 @@
 class AddCoverSteppPageSizes {
-  static double coverImageSizes(double deviceHeight) => deviceHeight * 0.5;
+  static double coverImageSizes(double deviceHeight) => deviceHeight * 0.4;
 }
