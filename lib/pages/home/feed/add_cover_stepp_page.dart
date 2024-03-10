@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:stepp_app/constants/home/feed/add_cover_stepp_page_sizes.dart';
-import 'package:stepp_app/constants/home/feed/add_cover_stepp_page_ui_strings.dart';
+import 'package:stepp_app/constants/home/add_cover_stepp_page_sizes.dart';
+import 'package:stepp_app/constants/home/add_cover_stepp_page_ui_strings.dart';
 import 'package:stepp_app/constants/place/stepp_place_ui_strings.dart';
+import 'package:stepp_app/constants/routes.dart';
 import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
+import 'package:stepp_app/providers/home/add_stepp_place_provider.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/custom_button.dart';
@@ -51,80 +54,94 @@ class _AddCoverPageState extends State<AddCoverPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: const Icon(
-            Icons.chevron_left,
-          ),
-        ),
-        centerTitle: true,
-        title: Text(
-          AddCoverSteppUiStrings.pageTitle,
-          style: context.textTheme.titleMedium!.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: Sizes.onlyRightPaddingMedium,
-            child: CustomButton(
-              backgroundColor: Colors.black.withOpacity(AppTheme.opacity85Percent),
-              child: Text(
-                AddCoverSteppUiStrings.preview,
-                style: context.textTheme.bodySmall!.copyWith(
-                  color: Colors.white,
-                ),
+    return Consumer<AddSteppPlaceProvider>(
+      builder: (context, value, child) {
+        return Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacementNamed(
+                  RouteNames.addEachSteppPage,
+                  arguments: {
+                    RouteParameters.addSteppProvider: Provider.of<AddSteppPlaceProvider>(
+                      context,
+                      listen: false,
+                    ),
+                    RouteParameters.currentAddEachStepp: value.currentAddStepp!.stepps!.last
+                  },
+                );
+              },
+              icon: const Icon(
+                Icons.chevron_left,
               ),
             ),
-          )
-        ],
-      ),
-      body: SafeArea(
-        child: Container(
-          margin: Sizes.onlyTopPaddingMedium,
-          decoration: BoxDecoration(
-            borderRadius: Sizes.topRoundBorderRadiusMedium,
-            color: Colors.black.withOpacity(AppTheme.opacity85Percent),
-          ),
-          child: Column(
-            children: [
+            centerTitle: true,
+            title: Text(
+              AddCoverSteppUiStrings.pageTitle,
+              style: context.textTheme.titleMedium!.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            actions: [
               Padding(
-                padding: Sizes.allSidePaddingMedium,
-                child: Row(
-                  children: [
-                    const CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/avatar.png'),
-                      radius: Sizes.profilePictureRadiusSmall,
+                padding: Sizes.onlyRightPaddingMedium,
+                child: CustomButton(
+                  backgroundColor: Colors.black.withOpacity(AppTheme.opacity85Percent),
+                  child: Text(
+                    AddCoverSteppUiStrings.preview,
+                    style: context.textTheme.bodySmall!.copyWith(
+                      color: Colors.white,
                     ),
-                    const SizedBox(
-                      width: Sizes.spacing15,
-                    ),
-                    Text(
-                      SteppPlaceUIStrings.steppPlaceMockProfileName,
-                      style: context.textTheme.bodyMedium!.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
-                    )
-                  ],
+                  ),
                 ),
-              ),
-              Container(
-                decoration: const BoxDecoration(
-                  borderRadius: Sizes.allRoundBorderMedium,
-                ),
-                child: _buildCoverImage(),
-              ),
-              _buildBeforeSelectImage()
+              )
             ],
           ),
-        ),
-      ),
+          body: SafeArea(
+            child: Container(
+              margin: Sizes.onlyTopPaddingMedium,
+              decoration: BoxDecoration(
+                borderRadius: Sizes.topRoundBorderRadiusMedium,
+                color: Colors.black.withOpacity(AppTheme.opacity85Percent),
+              ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: Sizes.allSidePaddingMedium,
+                    child: Row(
+                      children: [
+                        const CircleAvatar(
+                          backgroundImage: AssetImage('assets/images/avatar.png'),
+                          radius: Sizes.profilePictureRadiusSmall,
+                        ),
+                        const SizedBox(
+                          width: Sizes.spacing15,
+                        ),
+                        Text(
+                          SteppPlaceUIStrings.steppPlaceMockProfileName,
+                          style:
+                              context.textTheme.bodyMedium!.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: Sizes.allRoundBorderMedium,
+                    ),
+                    child: _buildCoverImage(),
+                  ),
+                  _buildAddDescription()
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
-  Widget _buildBeforeSelectImage() {
+  Widget _buildAddDescription() {
     return Expanded(
       child: Padding(
         padding: Sizes.onlyTopPaddingMedium,

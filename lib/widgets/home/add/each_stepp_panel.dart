@@ -39,12 +39,19 @@ class _EachSteppPanelState extends State<EachSteppPanel> {
   AssetEntity? selectEntity;
   TextEditingController titleTextController = TextEditingController();
   TextEditingController descriptionTextController = TextEditingController();
+  bool isClickEditCaption = false;
 
   @override
   void initState() {
     super.initState();
     titleTextController.text = widget.eachStepp.title ?? UiStrings.emptyLabel;
     descriptionTextController.text = widget.eachStepp.description ?? UiStrings.emptyLabel;
+  }
+
+  void toggleEditCaption() {
+    setState(() {
+      isClickEditCaption = !isClickEditCaption;
+    });
   }
 
   @override
@@ -91,27 +98,44 @@ class _EachSteppPanelState extends State<EachSteppPanel> {
                     width: Sizes.spacing15,
                   ),
                   Expanded(
-                    child: Row(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Flexible(
-                          child: SizedBox(
-                            height: HomePageSize.whatIsSteppTextFiledHeight,
-                            child: CustomTextField(
-                              removePadding: true,
-                              controller: titleTextController,
-                              backgroundColor: Colors.black,
-                              hintText: HomePageUiStrings.whatIsThisSteppHintText(
-                                addSteppProvider.currentAddStepp?.stepps?.indexOf(widget.eachStepp) ?? 0,
+                        Row(
+                          children: [
+                            Flexible(
+                              child: SizedBox(
+                                height: HomePageSize.whatIsSteppTextFiledHeight,
+                                child: CustomTextField(
+                                  removePadding: true,
+                                  controller: titleTextController,
+                                  backgroundColor: Colors.black,
+                                  hintText: HomePageUiStrings.whatIsThisSteppHintText(
+                                    addSteppProvider.currentAddStepp?.stepps?.indexOf(widget.eachStepp) ?? 0,
+                                  ),
+                                ),
                               ),
                             ),
+                            const SizedBox(
+                              width: Sizes.spacing10,
+                            ),
+                            Text(
+                              HomePageUiStrings.currentAddSteppIndex(
+                                  addSteppProvider.currentAddStepp?.stepps?.length ?? 0),
+                              style: context.textTheme.labelLarge!.copyWith(color: Colors.white),
+                            )
+                          ],
+                        ),
+                        GestureDetector(
+                          onTap: () => toggleEditCaption(),
+                          child: Text(
+                            isClickEditCaption
+                                ? HomePageUiStrings.addOrEditImage
+                                : HomePageUiStrings.addOrEditDescription,
+                            style: context.textTheme.bodySmall!.copyWith(
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: Sizes.spacing10,
-                        ),
-                        Text(
-                          HomePageUiStrings.currentAddSteppIndex(addSteppProvider.currentAddStepp?.stepps?.length ?? 0),
-                          style: context.textTheme.labelLarge!.copyWith(color: Colors.white),
                         )
                       ],
                     ),
@@ -122,7 +146,7 @@ class _EachSteppPanelState extends State<EachSteppPanel> {
             const SizedBox(
               height: HomePageSize.addSteppInputGallerySpace,
             ),
-            if (selectEntity == null) ...[
+            if (!isClickEditCaption) ...[
               _buildBeforeSelectImage(),
             ] else ...[
               _buildAfterSelectImage(),
@@ -153,6 +177,7 @@ class _EachSteppPanelState extends State<EachSteppPanel> {
                   setState(() {
                     selectEntity = entity;
                   });
+                  toggleEditCaption();
                 }
                 widget.selectEntity!(entity!);
               },

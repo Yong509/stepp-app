@@ -239,9 +239,18 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
             Padding(
               padding: Sizes.onlyRightPaddingMediumLarge,
               child: CustomButton(
-                onTap: () => Navigator.of(context).pushNamed(
-                  RouteNames.addCoverPage,
-                ),
+                onTap: () {
+                  _disposeVideoController();
+                  Navigator.of(context).pushReplacementNamed(
+                    RouteNames.addCoverPage,
+                    arguments: {
+                      RouteParameters.addSteppProvider: Provider.of<AddSteppPlaceProvider>(
+                        context,
+                        listen: false,
+                      )
+                    },
+                  );
+                },
                 padding: Sizes.allSidePaddingMediumSmall,
                 backgroundColor: Colors.black.withOpacity(AppTheme.opacity80Percent),
                 child: Row(
