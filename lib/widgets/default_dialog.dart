@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stepp_app/constants/sizes.dart';
 
-import 'package:stepp_app/styles/app_theme.dart';
-
 /// DefaultDialog used for create a properly sized dialog
 class DefaultDialog extends StatelessWidget {
   const DefaultDialog({
@@ -10,7 +8,7 @@ class DefaultDialog extends StatelessWidget {
     required this.body,
     this.insetPadding = Sizes.allSidePaddingMedium,
     this.outsitePadding = Sizes.allSidePaddingMedium,
-    this.backgroundColor = AppTheme.black900,
+    this.backgroundColor = Colors.black,
   }) : super(key: key);
 
   final List<Widget> body;

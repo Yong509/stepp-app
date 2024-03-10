@@ -36,9 +36,16 @@ class AddSteppPlaceProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setEntityCurrentEachStepp(String id, AssetEntity entity) {
+    if (currentAddStepp != null && currentAddStepp!.stepps != null) {
+      final currentEachStepp = currentAddStepp?.stepps?.firstWhere((element) => element.id == id);
+      currentEachStepp!.image = entity;
+      notifyListeners();
+    }
+  }
+
   void setEachStepp(EachStepp stepp, String id) {
-    final index =
-        _currentAddStepp?.stepps?.indexWhere((element) => element.id == id);
+    final index = _currentAddStepp?.stepps?.indexWhere((element) => element.id == id);
     if (index != null) {
       _currentAddStepp!.stepps![index]
         ..description = stepp.description

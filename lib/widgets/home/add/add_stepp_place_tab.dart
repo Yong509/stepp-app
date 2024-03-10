@@ -83,6 +83,7 @@ class _AddSteppPlaceTabState extends State<AddSteppPlaceTab> {
                         RouteNames.addEachSteppPage,
                         arguments: {
                           RouteParameters.addSteppProvider: Provider.of<AddSteppPlaceProvider>(context, listen: false),
+                          RouteParameters.currentAddEachStepp: value.currentAddStepp!.stepps!.last
                         },
                       );
                     } else {
