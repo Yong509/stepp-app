@@ -25,4 +25,8 @@ class HomePageSize {
   static const selectImageIconBorderWidth = 2.0;
   static const imageGalleryPanelPadding = EdgeInsets.only(top: 30);
   static const whatIsSteppTextFiledHeight = 50.0;
+
+  static const quitEachSteppDialogInsetPadding = EdgeInsets.symmetric(vertical: 20, horizontal: 10);
+  static EdgeInsets quitEachSteppDialogOutSitePadding(double deviceWidth) =>
+      EdgeInsets.symmetric(horizontal: deviceWidth * 0.2);
 }

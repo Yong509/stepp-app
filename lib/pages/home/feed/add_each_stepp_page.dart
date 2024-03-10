@@ -5,6 +5,7 @@ import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:stepp_app/constants/home/home_page_size.dart';
 import 'package:stepp_app/constants/home/home_page_ui_strings.dart';
 import 'package:stepp_app/constants/routes.dart';
 import 'package:stepp_app/constants/sizes.dart';
@@ -14,6 +15,7 @@ import 'package:stepp_app/providers/home/add_stepp_place_provider.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/custom_button.dart';
+import 'package:stepp_app/widgets/default_dialog.dart';
 import 'package:stepp_app/widgets/home/add/each_stepp_panel.dart';
 import 'package:video_player/video_player.dart';
 
@@ -61,24 +63,31 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SlidingUpPanel(
-        color: Colors.transparent,
-        panel: EachSteppPanel(
-          eachStepp: widget.eachStepp,
-          selectEntity: (entity) {
-            setState(() {
-              currentEntity = entity;
-            });
-          },
-        ),
-        body: Stack(
-          children: [
-            _buildCover(),
-            SafeArea(
-              child: _buildAppBar(),
+      body: Consumer<AddSteppPlaceProvider>(
+        builder: (context, value, child) {
+          return SlidingUpPanel(
+            color: Colors.transparent,
+            panel: EachSteppPanel(
+              eachStepp: widget.eachStepp,
+              selectEntity: (entity) {
+                value.setEntityCurrentEachStepp(widget.eachStepp.id!, entity);
+              },
+              handleAddMoreStepp: () async {
+                if (widget.eachStepp.image != null) {
+                  await _videoPlayerController?.dispose();
+                }
+              },
             ),
-          ],
-        ),
+            body: Stack(
+              children: [
+                _buildCover(),
+                SafeArea(
+                  child: _buildAppBar(),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
@@ -86,15 +95,15 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
   Widget _buildCover() {
     return Consumer<AddSteppPlaceProvider>(
       builder: (context, value, child) {
-        if (currentEntity != null) {
-          switch (currentEntity!.type) {
+        if (value.currentAddStepp?.stepps?.firstWhere((element) => element.id == widget.eachStepp.id).image != null) {
+          switch (widget.eachStepp.image!.type) {
             case AssetType.image:
               _disposeVideoController();
               return Container(
                 color: AppTheme.black900,
                 child: Center(
                   child: AssetEntityImage(
-                    currentEntity!,
+                    widget.eachStepp.image!,
                     isOriginal: true,
                     filterQuality: FilterQuality.high,
                   ),
@@ -102,15 +111,15 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
               );
             case AssetType.video:
               return FutureBuilder(
-                future: _initializeAndPlayVideo(currentEntity!),
+                future: _initializeAndPlayVideo(widget.eachStepp.image!),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     return Container(
                       color: AppTheme.black900,
                       child: Center(
                         child: AspectRatio(
-                          key: ValueKey(currentEntity!.id),
-                          aspectRatio: _videoPlayerController!.value.aspectRatio,
+                          key: ValueKey(widget.eachStepp.image!.id),
+                          aspectRatio: _videoPlayerController?.value.aspectRatio ?? 0,
                           child: VideoPlayer(_videoPlayerController!),
                         ),
                       ),
@@ -154,8 +163,23 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
             Row(
               children: [
                 IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
+                  onPressed: () async {
+                    if (value.currentAddStepp!.stepps!.indexOf(widget.eachStepp) == 0) {
+                      await showDialog(
+                        context: context,
+                        barrierDismissible: true,
+                        builder: (context) => _buildDialogBeforeQuitPage(),
+                      );
+                    } else {
+                      Navigator.of(context).pushReplacementNamed(RouteNames.addEachSteppPage, arguments: {
+                        RouteParameters.addSteppProvider: Provider.of<AddSteppPlaceProvider>(
+                          context,
+                          listen: false,
+                        ),
+                        RouteParameters.currentAddEachStepp:
+                            value.currentAddStepp!.stepps![value.currentAddStepp!.stepps!.indexOf(widget.eachStepp) - 1]
+                      });
+                    }
                   },
                   icon: const Icon(
                     Icons.chevron_left_outlined,
@@ -245,6 +269,40 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
           ],
         );
       },
+    );
+  }
+
+  Widget _buildDialogBeforeQuitPage() {
+    return DefaultDialog(
+      outsitePadding: HomePageSize.quitEachSteppDialogOutSitePadding(context.deviceSize.width),
+      insetPadding: HomePageSize.quitEachSteppDialogInsetPadding,
+      body: [
+        Text(
+          HomePageUiStrings.quitEditSteppDialogTitle,
+          textAlign: TextAlign.center,
+          style: context.textTheme.bodyMedium!.copyWith(color: Colors.white),
+        ),
+        const SizedBox(
+          height: Sizes.spacing10,
+        ),
+        GestureDetector(
+          onTap: () => Navigator.of(context).pop(),
+          child: Text(
+            HomePageUiStrings.stayEditSteppPage,
+            style: context.textTheme.bodySmall!.copyWith(color: Colors.white),
+          ),
+        ),
+        const SizedBox(
+          height: Sizes.spacing5,
+        ),
+        GestureDetector(
+          onTap: () => Navigator.of(context).pushReplacementNamed(RouteNames.homePage),
+          child: Text(
+            HomePageUiStrings.quitEditSteppPage,
+            style: context.textTheme.bodySmall!.copyWith(color: Colors.red),
+          ),
+        ),
+      ],
     );
   }
 }

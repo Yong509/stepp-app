@@ -24,10 +24,12 @@ class EachSteppPanel extends StatefulWidget {
     Key? key,
     required this.eachStepp,
     this.selectEntity,
+    required this.handleAddMoreStepp,
   }) : super(key: key);
 
   final EachStepp eachStepp;
   final Function(AssetEntity entity)? selectEntity;
+  final VoidCallback handleAddMoreStepp;
 
   @override
   State<EachSteppPanel> createState() => _EachSteppPanelState();
@@ -99,7 +101,7 @@ class _EachSteppPanelState extends State<EachSteppPanel> {
                               controller: titleTextController,
                               backgroundColor: Colors.black,
                               hintText: HomePageUiStrings.whatIsThisSteppHintText(
-                                addSteppProvider.currentAddStepp?.stepps?.length ?? 0,
+                                addSteppProvider.currentAddStepp?.stepps?.indexOf(widget.eachStepp) ?? 0,
                               ),
                             ),
                           ),
@@ -214,6 +216,7 @@ class _EachSteppPanelState extends State<EachSteppPanel> {
                       child: Center(
                         child: CustomButton(
                           onTap: () {
+                            widget.handleAddMoreStepp.call();
                             value.setEachStepp(
                               EachStepp(
                                 image: selectEntity,
@@ -223,13 +226,14 @@ class _EachSteppPanelState extends State<EachSteppPanel> {
                               widget.eachStepp.id!,
                             );
                             value.addEmptyEachStepp();
-                            Navigator.of(context).pushNamed(
+                            Navigator.of(context).pushReplacementNamed(
                               RouteNames.addEachSteppPage,
                               arguments: {
                                 RouteParameters.addSteppProvider: Provider.of<AddSteppPlaceProvider>(
                                   context,
                                   listen: false,
                                 ),
+                                RouteParameters.currentAddEachStepp: value.currentAddStepp!.stepps!.last,
                               },
                             );
                           },

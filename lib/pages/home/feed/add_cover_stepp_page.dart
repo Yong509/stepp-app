@@ -54,7 +54,9 @@ class _AddCoverPageState extends State<AddCoverPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
           icon: const Icon(
             Icons.chevron_left,
           ),
