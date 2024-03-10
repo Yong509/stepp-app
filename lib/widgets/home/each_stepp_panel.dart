@@ -17,7 +17,7 @@ import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/custom_button.dart';
 import 'package:stepp_app/widgets/custom_text_field.dart';
-import 'package:stepp_app/widgets/home/add/image_gallery_grid.dart';
+import 'package:stepp_app/widgets/home/image_gallery_grid.dart';
 
 class EachSteppPanel extends StatefulWidget {
   const EachSteppPanel({

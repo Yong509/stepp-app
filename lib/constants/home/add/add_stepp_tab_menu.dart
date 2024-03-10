@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stepp_app/constants/home/home_page_size.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
-import 'package:stepp_app/widgets/home/add/add_stepp_place_tab.dart';
+import 'package:stepp_app/widgets/home/add_stepp_place/add_stepp_place_tab.dart';
+
 class AddSteppTabMenu {
   static List<Tab> addSteppMenu = [
     Tab(
@@ -34,7 +35,7 @@ class AddSteppTabMenu {
     ),
   ];
 
-  static List<Widget> addSteppTabView = [
+  static List<Widget> addCoverSteppTabView = [
     Container(),
     const AddSteppPlaceTab(),
     Container(),

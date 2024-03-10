@@ -16,7 +16,7 @@ import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/custom_button.dart';
 import 'package:stepp_app/widgets/default_dialog.dart';
-import 'package:stepp_app/widgets/home/add/each_stepp_panel.dart';
+import 'package:stepp_app/widgets/home/each_stepp_panel.dart';
 import 'package:video_player/video_player.dart';
 
 class AddEachSteppPage extends StatefulWidget {

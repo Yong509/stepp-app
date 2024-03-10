@@ -3,8 +3,8 @@ import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:stepp_app/constants/home/add_cover_stepp_page_sizes.dart';
-import 'package:stepp_app/constants/home/add_cover_stepp_page_ui_strings.dart';
+import 'package:stepp_app/constants/home/add/add_cover_stepp_page_sizes.dart';
+import 'package:stepp_app/constants/home/add/add_cover_stepp_page_ui_strings.dart';
 import 'package:stepp_app/constants/place/stepp_place_ui_strings.dart';
 import 'package:stepp_app/constants/routes.dart';
 import 'package:stepp_app/constants/sizes.dart';
@@ -13,7 +13,8 @@ import 'package:stepp_app/providers/home/add_stepp_place_provider.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/custom_button.dart';
-import 'package:stepp_app/widgets/home/add/image_gallery_grid.dart';
+import 'package:stepp_app/widgets/home/add_stepp_place/add_cover_stepp_tab.dart';
+import 'package:stepp_app/widgets/home/image_gallery_grid.dart';
 import 'package:video_player/video_player.dart';
 
 class AddCoverPage extends StatefulWidget {
@@ -131,7 +132,7 @@ class _AddCoverPageState extends State<AddCoverPage> {
                     ),
                     child: _buildCoverImage(),
                   ),
-                  _buildAddDescription()
+                  const AddCoverSteppTab(),
                 ],
               ),
             ),
@@ -141,7 +142,7 @@ class _AddCoverPageState extends State<AddCoverPage> {
     );
   }
 
-  Widget _buildAddDescription() {
+  Widget _buildAddImageToCover() {
     return Expanded(
       child: Padding(
         padding: Sizes.onlyTopPaddingMedium,
