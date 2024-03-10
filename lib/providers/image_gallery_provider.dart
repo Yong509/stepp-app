@@ -23,9 +23,6 @@ class ImageGalleryProvider extends ChangeNotifier {
 
   Future<void> initialGallery() async {
     final allAssets = await imageGalleryService.getAssets();
-    for (var element in allAssets) {
-      print("check ${element.name}");
-    }
     entities = filterCollections(allAssets);
 
     for (var element in entities!) {

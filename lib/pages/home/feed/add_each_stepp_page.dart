@@ -33,7 +33,6 @@ class AddEachSteppPage extends StatefulWidget {
 
 class _AddEachSteppPageState extends State<AddEachSteppPage> {
   VideoPlayerController? _videoPlayerController;
-  AssetEntity? currentEntity;
 
   @override
   void initState() {
@@ -296,7 +295,12 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
           height: Sizes.spacing5,
         ),
         GestureDetector(
-          onTap: () => Navigator.of(context).pushReplacementNamed(RouteNames.homePage),
+          onTap: () async {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+              RouteNames.homePage,
+              (route) => false,
+            );
+          },
           child: Text(
             HomePageUiStrings.quitEditSteppPage,
             style: context.textTheme.bodySmall!.copyWith(color: Colors.red),
