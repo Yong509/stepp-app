@@ -62,7 +62,10 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
   Future<void> pageNavigate() async {
     final value = context.read<AddSteppPlaceProvider>().currentAddStepp;
     if (widget.eachStepp.image == null) {
-      Navigator.of(context).pop();
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        RouteNames.homePage,
+        (route) => false,
+      );
     } else if (value!.stepps!.indexOf(widget.eachStepp) == 0) {
       await showDialog(
         context: context,
@@ -306,7 +309,9 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
           height: Sizes.spacing10,
         ),
         GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
+          onTap: () {
+            Navigator.of(context).pop();
+          },
           child: Text(
             HomePageUiStrings.stayEditSteppPage,
             style: context.textTheme.bodySmall!.copyWith(color: Colors.white),
