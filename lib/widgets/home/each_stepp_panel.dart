@@ -120,8 +120,7 @@ class _EachSteppPanelState extends State<EachSteppPanel> {
                               width: Sizes.spacing10,
                             ),
                             Text(
-                              HomePageUiStrings.currentAddSteppIndex(
-                                  addSteppProvider.currentAddStepp?.stepps?.length ?? 0),
+                              HomePageUiStrings.currentAddSteppIndex(addSteppProvider.currentAddStepp?.stepps?.length ?? 0),
                               style: context.textTheme.labelLarge!.copyWith(color: Colors.white),
                             )
                           ],
@@ -129,9 +128,7 @@ class _EachSteppPanelState extends State<EachSteppPanel> {
                         GestureDetector(
                           onTap: () => toggleEditCaption(),
                           child: Text(
-                            isClickEditCaption
-                                ? HomePageUiStrings.addOrEditImage
-                                : HomePageUiStrings.addOrEditDescription,
+                            isClickEditCaption ? HomePageUiStrings.addOrEditImage : HomePageUiStrings.addOrEditDescription,
                             style: context.textTheme.bodySmall!.copyWith(
                               color: Colors.white,
                             ),
@@ -223,6 +220,7 @@ class _EachSteppPanelState extends State<EachSteppPanel> {
                         ),
                         GestureDetector(
                           onTap: () {
+                            toggleEditCaption();
                             setState(() {
                               selectEntity = null;
                             });

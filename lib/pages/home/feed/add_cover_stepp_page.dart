@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import 'package:provider/provider.dart';
@@ -8,13 +9,14 @@ import 'package:stepp_app/constants/home/add/add_cover_stepp_page_ui_strings.dar
 import 'package:stepp_app/constants/place/stepp_place_ui_strings.dart';
 import 'package:stepp_app/constants/routes.dart';
 import 'package:stepp_app/constants/sizes.dart';
-import 'package:stepp_app/constants/ui_strings.dart';
 import 'package:stepp_app/providers/home/add_stepp_place_provider.dart';
+import 'package:stepp_app/providers/image_gallery_provider.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/custom_button.dart';
+import 'package:stepp_app/widgets/custom_opacity_tile.dart';
 import 'package:stepp_app/widgets/home/add_stepp_place/add_cover_stepp_tab.dart';
-import 'package:stepp_app/widgets/home/image_gallery_grid.dart';
+import 'package:stepp_app/widgets/home/add_stepp_place/image_thumbnail_cover.dart';
 import 'package:video_player/video_player.dart';
 
 class AddCoverPage extends StatefulWidget {
@@ -26,7 +28,6 @@ class AddCoverPage extends StatefulWidget {
 
 class _AddCoverPageState extends State<AddCoverPage> {
   VideoPlayerController? _videoPlayerController;
-  AssetEntity? currentEntity;
 
   @override
   void initState() {
@@ -98,43 +99,40 @@ class _AddCoverPageState extends State<AddCoverPage> {
               )
             ],
           ),
-          body: SafeArea(
-            child: Container(
-              margin: Sizes.onlyTopPaddingMedium,
-              decoration: BoxDecoration(
-                borderRadius: Sizes.topRoundBorderRadiusMedium,
-                color: Colors.black.withOpacity(AppTheme.opacity85Percent),
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: Sizes.allSidePaddingMedium,
-                    child: Row(
-                      children: [
-                        const CircleAvatar(
-                          backgroundImage: AssetImage('assets/images/avatar.png'),
-                          radius: Sizes.profilePictureRadiusSmall,
-                        ),
-                        const SizedBox(
-                          width: Sizes.spacing15,
-                        ),
-                        Text(
-                          SteppPlaceUIStrings.steppPlaceMockProfileName,
-                          style:
-                              context.textTheme.bodyMedium!.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
+          body: Container(
+            margin: Sizes.onlyTopPaddingMedium,
+            decoration: BoxDecoration(
+              borderRadius: Sizes.topRoundBorderRadiusMedium,
+              color: Colors.black.withOpacity(AppTheme.opacity85Percent),
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: Sizes.allSidePaddingMedium,
+                  child: Row(
+                    children: [
+                      const CircleAvatar(
+                        backgroundImage: AssetImage('assets/images/avatar.png'),
+                        radius: Sizes.profilePictureRadiusSmall,
+                      ),
+                      const SizedBox(
+                        width: Sizes.spacing15,
+                      ),
+                      Text(
+                        SteppPlaceUIStrings.steppPlaceMockProfileName,
+                        style: context.textTheme.bodyMedium!.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                      )
+                    ],
                   ),
-                  Container(
-                    decoration: const BoxDecoration(
-                      borderRadius: Sizes.allRoundBorderMedium,
-                    ),
-                    child: _buildCoverImage(),
+                ),
+                Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: Sizes.allRoundBorderMedium,
                   ),
-                  const AddCoverSteppTab(),
-                ],
-              ),
+                  child: _buildCoverWidget(),
+                ),
+                const AddCoverSteppTab(),
+              ],
             ),
           ),
         );
@@ -142,92 +140,90 @@ class _AddCoverPageState extends State<AddCoverPage> {
     );
   }
 
-  Widget _buildAddImageToCover() {
-    return Expanded(
-      child: Padding(
-        padding: Sizes.onlyTopPaddingMedium,
-        child: Column(
+  Widget _buildCoverWidget() {
+    return Consumer<AddSteppPlaceProvider>(
+      builder: (context, value, child) {
+        return Stack(
           children: [
-            Text(
-              UiStrings.addImgOrVDOPlaceholder,
-              style: context.textTheme.bodyMedium!.copyWith(
-                color: Colors.white,
-              ),
-            ),
-            const SizedBox(
-              height: Sizes.spacing5,
-            ),
-            Expanded(
-              child: ImageGalleryGrid(
-                isSelect: (entity) {
-                  if (entity != null) {
-                    setState(() {
-                      currentEntity = entity;
-                    });
-                  }
-                },
+            _buildAssetWidget(),
+            Positioned.fill(
+              bottom: AddCoverSteppPageSizes.titleSteppCoverWidgetBottomPosition,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: CustomOpacityTile(
+                  outsitePadding: Sizes.horizontalPaddingHuge,
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      PhosphorIcon(
+                        PhosphorIcons.mapPin(
+                          PhosphorIconsStyle.fill,
+                        ),
+                        color: Colors.white,
+                      ),
+                      const SizedBox(
+                        width: Sizes.spacing15,
+                      ),
+                      Text(
+                        value.currentAddStepp!.steppTitle,
+                        textAlign: TextAlign.center,
+                        style: context.textTheme.bodyMedium!.copyWith(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             )
           ],
-        ),
-      ),
+        );
+      },
     );
   }
 
-  Widget _buildCoverImage() {
+  Widget _buildAssetWidget() {
+    final currentEntity = context.watch<ImageGalleryProvider>().currentSelect;
     if (currentEntity != null) {
-      switch (currentEntity!.type) {
+      switch (currentEntity.type) {
         case AssetType.image:
-          return ClipRRect(
-            borderRadius: Sizes.allRoundBorderMedium,
-            child: Container(
-              width: double.infinity,
-              height: AddCoverSteppPageSizes.coverImageSizes(context.deviceSize.height),
-              color: AppTheme.black900,
+          _disposeVideoController();
+          return ImageThumbnailCover(
               child: AssetEntityImage(
-                currentEntity!,
+              currentEntity,
                 isOriginal: true,
                 filterQuality: FilterQuality.high,
-                fit: BoxFit.fitHeight,
-              ),
+              fit: BoxFit.fitHeight,
             ),
           );
         case AssetType.video:
           return FutureBuilder(
-            future: _initializeAndPlayVideo(currentEntity!),
+            future: _initializeAndPlayVideo(currentEntity),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                return Container(
-                  height: AddCoverSteppPageSizes.coverImageSizes(context.deviceSize.height),
-                  decoration: const BoxDecoration(
-                    color: AppTheme.black900,
-                    borderRadius: Sizes.allRoundBorderMedium,
-                  ),
+                return ImageThumbnailCover(
                   child: Center(
                     child: AspectRatio(
-                      key: ValueKey(currentEntity!.id),
+                      key: ValueKey(currentEntity.id),
                       aspectRatio: _videoPlayerController!.value.aspectRatio,
                       child: VideoPlayer(_videoPlayerController!),
                     ),
                   ),
                 );
               }
-              return ClipRRect(
-                borderRadius: Sizes.allRoundBorderMedium,
-                child: Skeletonizer(
-                  effect: ShimmerEffect(
-                    baseColor: AppTheme.black900,
-                    highlightColor: AppTheme.black900.withAlpha(AppTheme.alpha8Percent),
-                  ),
-                  containersColor: AppTheme.black900,
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: AddCoverSteppPageSizes.coverImageSizes(context.deviceSize.height),
-                    child: const Card(
-                      margin: EdgeInsets.zero,
-                      shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.zero,
-                      ),
+              return Skeletonizer(
+                effect: ShimmerEffect(
+                  baseColor: AppTheme.black900,
+                  highlightColor: AppTheme.black900.withAlpha(AppTheme.alpha8Percent),
+                ),
+                containersColor: AppTheme.black900,
+                child: SizedBox(
+                  width: double.infinity,
+                  height: AddCoverSteppPageSizes.coverImageSizes(context.deviceSize.height),
+                  child: const Card(
+                    margin: EdgeInsets.zero,
+                    shape: OutlineInputBorder(
+                      borderRadius: BorderRadius.zero,
                     ),
                   ),
                 ),
@@ -235,18 +231,9 @@ class _AddCoverPageState extends State<AddCoverPage> {
             },
           );
         default:
-          return Container(
-            height: AddCoverSteppPageSizes.coverImageSizes(context.deviceSize.height),
-            color: AppTheme.black900,
-          );
+          return const ImageThumbnailCover();
       }
     }
-    return Container(
-      height: AddCoverSteppPageSizes.coverImageSizes(context.deviceSize.height),
-      decoration: const BoxDecoration(
-        borderRadius: Sizes.allRoundBorderMedium,
-        color: AppTheme.black900,
-      ),
-    );
+    return const ImageThumbnailCover();
   }
 }
