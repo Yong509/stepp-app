@@ -71,7 +71,6 @@ class _AddCoverPageState extends State<AddCoverPage> {
                     ),
                     RouteParameters.currentAddEachStepp: value.currentAddStepp!.stepps!.last
                   },
-                  
                 );
               },
               icon: const Icon(

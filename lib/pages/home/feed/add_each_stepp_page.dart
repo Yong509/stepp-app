@@ -16,7 +16,7 @@ import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/custom_button.dart';
 import 'package:stepp_app/widgets/default_dialog.dart';
-import 'package:stepp_app/widgets/home/each_stepp_panel.dart';
+import 'package:stepp_app/widgets/home/add_stepp_place/each_stepp_panel.dart';
 import 'package:video_player/video_player.dart';
 
 class AddEachSteppPage extends StatefulWidget {
@@ -57,6 +57,30 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
     await _videoPlayerController!.initialize();
     await _videoPlayerController!.play();
     await _videoPlayerController!.setLooping(true);
+  }
+
+  Future<void> pageNavigate() async {
+    final value = context.read<AddSteppPlaceProvider>().currentAddStepp;
+    if (widget.eachStepp.image == null) {
+      Navigator.of(context).pop();
+    } else if (value!.stepps!.indexOf(widget.eachStepp) == 0) {
+      await showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (context) => _buildDialogBeforeQuitPage(),
+      );
+    } else {
+      Navigator.of(context).pushReplacementNamed(
+        RouteNames.addEachSteppPage,
+        arguments: {
+          RouteParameters.addSteppProvider: Provider.of<AddSteppPlaceProvider>(
+            context,
+            listen: false,
+          ),
+          RouteParameters.currentAddEachStepp: value.stepps![value.stepps!.indexOf(widget.eachStepp) - 1]
+        },
+      );
+    }
   }
 
   @override
@@ -166,25 +190,7 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
               children: [
                 IconButton(
                   onPressed: () async {
-                    if (value.currentAddStepp!.stepps!.indexOf(widget.eachStepp) == 0) {
-                      await showDialog(
-                        context: context,
-                        barrierDismissible: true,
-                        builder: (context) => _buildDialogBeforeQuitPage(),
-                      );
-                    } else {
-                      Navigator.of(context).pushReplacementNamed(
-                        RouteNames.addEachSteppPage,
-                        arguments: {
-                        RouteParameters.addSteppProvider: Provider.of<AddSteppPlaceProvider>(
-                          context,
-                          listen: false,
-                        ),
-                        RouteParameters.currentAddEachStepp:
-                            value.currentAddStepp!.stepps![value.currentAddStepp!.stepps!.indexOf(widget.eachStepp) - 1]
-                        },
-                      );
-                    }
+                    await pageNavigate();
                   },
                   icon: const Icon(
                     Icons.chevron_left_outlined,
