@@ -71,6 +71,7 @@ class _AddCoverPageState extends State<AddCoverPage> {
                     ),
                     RouteParameters.currentAddEachStepp: value.currentAddStepp!.stepps!.last
                   },
+                  
                 );
               },
               icon: const Icon(
@@ -125,11 +126,13 @@ class _AddCoverPageState extends State<AddCoverPage> {
                     ],
                   ),
                 ),
-                Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: Sizes.allRoundBorderMedium,
+                Flexible(
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: Sizes.allRoundBorderMedium,
+                    ),
+                    child: _buildCoverWidget(),
                   ),
-                  child: _buildCoverWidget(),
                 ),
                 const AddCoverSteppTab(),
               ],

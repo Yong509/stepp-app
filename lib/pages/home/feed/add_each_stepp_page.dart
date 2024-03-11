@@ -61,32 +61,35 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Consumer<AddSteppPlaceProvider>(
-        builder: (context, value, child) {
-          return SlidingUpPanel(
-            color: Colors.transparent,
-            panel: EachSteppPanel(
-              eachStepp: widget.eachStepp,
-              selectEntity: (entity) {
-                value.setEntityCurrentEachStepp(widget.eachStepp.id!, entity);
-              },
-              handleAddMoreStepp: () async {
-                if (widget.eachStepp.image != null) {
-                  await _videoPlayerController?.dispose();
-                }
-              },
-            ),
-            body: Stack(
-              children: [
-                _buildCover(),
-                SafeArea(
-                  child: _buildAppBar(),
-                ),
-              ],
-            ),
-          );
-        },
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: Consumer<AddSteppPlaceProvider>(
+          builder: (context, value, child) {
+            return SlidingUpPanel(
+              color: Colors.transparent,
+              panel: EachSteppPanel(
+                eachStepp: widget.eachStepp,
+                selectEntity: (entity) {
+                  value.setEntityCurrentEachStepp(widget.eachStepp.id!, entity);
+                },
+                handleAddMoreStepp: () async {
+                  if (widget.eachStepp.image != null) {
+                    await _videoPlayerController?.dispose();
+                  }
+                },
+              ),
+              body: Stack(
+                children: [
+                  _buildCover(),
+                  SafeArea(
+                    child: _buildAppBar(),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -170,14 +173,17 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
                         builder: (context) => _buildDialogBeforeQuitPage(),
                       );
                     } else {
-                      Navigator.of(context).pushReplacementNamed(RouteNames.addEachSteppPage, arguments: {
+                      Navigator.of(context).pushReplacementNamed(
+                        RouteNames.addEachSteppPage,
+                        arguments: {
                         RouteParameters.addSteppProvider: Provider.of<AddSteppPlaceProvider>(
                           context,
                           listen: false,
                         ),
                         RouteParameters.currentAddEachStepp:
                             value.currentAddStepp!.stepps![value.currentAddStepp!.stepps!.indexOf(widget.eachStepp) - 1]
-                      });
+                        },
+                      );
                     }
                   },
                   icon: const Icon(
