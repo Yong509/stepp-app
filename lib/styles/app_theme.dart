@@ -22,6 +22,9 @@ class AppTheme {
   // Black
   static const black900 = Color(0xFF171717);
 
+  // Gray
+  static const gray900 = Color(0XFFC4C4C4);
+
   static TextTheme customTextTheme = TextTheme(
     bodyMedium: GoogleFonts.getFont(
       googleFontFamily,

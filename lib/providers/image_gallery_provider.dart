@@ -10,6 +10,13 @@ class ImageGalleryProvider extends ChangeNotifier {
   }
   ImageGalleryService imageGalleryService;
 
+  AssetEntity? _currentSelect;
+  AssetEntity? get currentSelect => _currentSelect;
+  set currentSelect(AssetEntity? entity) {
+    _currentSelect = entity;
+    notifyListeners();
+  }
+
   List<AssetPathEntity>? entities = [];
   List<List<AssetEntity>>? assetEntity = [];
   List<PMDarwinAssetCollectionSubtype> desiredSubtypesIOS = [

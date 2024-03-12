@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:stepp_app/constants/routes.dart';
@@ -28,6 +29,10 @@ class _SteppAppState extends State<SteppApp> {
   @override
   Widget build(BuildContext context) {
     final providers = _initializeServices();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MultiProvider(
       providers: providers,
       child: MaterialApp(

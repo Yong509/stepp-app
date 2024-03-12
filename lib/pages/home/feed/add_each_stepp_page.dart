@@ -16,7 +16,7 @@ import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/custom_button.dart';
 import 'package:stepp_app/widgets/default_dialog.dart';
-import 'package:stepp_app/widgets/home/add/each_stepp_panel.dart';
+import 'package:stepp_app/widgets/home/add_stepp_place/each_stepp_panel.dart';
 import 'package:video_player/video_player.dart';
 
 class AddEachSteppPage extends StatefulWidget {
@@ -59,34 +59,64 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
     await _videoPlayerController!.setLooping(true);
   }
 
+  Future<void> pageNavigate() async {
+    final value = context.read<AddSteppPlaceProvider>().currentAddStepp;
+    if (widget.eachStepp.image == null) {
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        RouteNames.homePage,
+        (route) => false,
+      );
+    } else if (value!.stepps!.indexOf(widget.eachStepp) == 0) {
+      await showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (context) => _buildDialogBeforeQuitPage(),
+      );
+    } else {
+      Navigator.of(context).pushReplacementNamed(
+        RouteNames.addEachSteppPage,
+        arguments: {
+          RouteParameters.addSteppProvider: Provider.of<AddSteppPlaceProvider>(
+            context,
+            listen: false,
+          ),
+          RouteParameters.currentAddEachStepp: value.stepps![value.stepps!.indexOf(widget.eachStepp) - 1]
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Consumer<AddSteppPlaceProvider>(
-        builder: (context, value, child) {
-          return SlidingUpPanel(
-            color: Colors.transparent,
-            panel: EachSteppPanel(
-              eachStepp: widget.eachStepp,
-              selectEntity: (entity) {
-                value.setEntityCurrentEachStepp(widget.eachStepp.id!, entity);
-              },
-              handleAddMoreStepp: () async {
-                if (widget.eachStepp.image != null) {
-                  await _videoPlayerController?.dispose();
-                }
-              },
-            ),
-            body: Stack(
-              children: [
-                _buildCover(),
-                SafeArea(
-                  child: _buildAppBar(),
-                ),
-              ],
-            ),
-          );
-        },
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: Consumer<AddSteppPlaceProvider>(
+          builder: (context, value, child) {
+            return SlidingUpPanel(
+              color: Colors.transparent,
+              panel: EachSteppPanel(
+                eachStepp: widget.eachStepp,
+                selectEntity: (entity) {
+                  value.setEntityCurrentEachStepp(widget.eachStepp.id!, entity);
+                },
+                handleAddMoreStepp: () async {
+                  if (widget.eachStepp.image != null) {
+                    await _videoPlayerController?.dispose();
+                  }
+                },
+              ),
+              body: Stack(
+                children: [
+                  _buildCover(),
+                  SafeArea(
+                    child: _buildAppBar(),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -163,22 +193,7 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
               children: [
                 IconButton(
                   onPressed: () async {
-                    if (value.currentAddStepp!.stepps!.indexOf(widget.eachStepp) == 0) {
-                      await showDialog(
-                        context: context,
-                        barrierDismissible: true,
-                        builder: (context) => _buildDialogBeforeQuitPage(),
-                      );
-                    } else {
-                      Navigator.of(context).pushReplacementNamed(RouteNames.addEachSteppPage, arguments: {
-                        RouteParameters.addSteppProvider: Provider.of<AddSteppPlaceProvider>(
-                          context,
-                          listen: false,
-                        ),
-                        RouteParameters.currentAddEachStepp:
-                            value.currentAddStepp!.stepps![value.currentAddStepp!.stepps!.indexOf(widget.eachStepp) - 1]
-                      });
-                    }
+                    await pageNavigate();
                   },
                   icon: const Icon(
                     Icons.chevron_left_outlined,
@@ -239,9 +254,18 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
             Padding(
               padding: Sizes.onlyRightPaddingMediumLarge,
               child: CustomButton(
-                onTap: () => Navigator.of(context).pushNamed(
-                  RouteNames.addCoverPage,
-                ),
+                onTap: () {
+                  _disposeVideoController();
+                  Navigator.of(context).pushReplacementNamed(
+                    RouteNames.addCoverPage,
+                    arguments: {
+                      RouteParameters.addSteppProvider: Provider.of<AddSteppPlaceProvider>(
+                        context,
+                        listen: false,
+                      )
+                    },
+                  );
+                },
                 padding: Sizes.allSidePaddingMediumSmall,
                 backgroundColor: Colors.black.withOpacity(AppTheme.opacity80Percent),
                 child: Row(
@@ -285,7 +309,9 @@ class _AddEachSteppPageState extends State<AddEachSteppPage> {
           height: Sizes.spacing10,
         ),
         GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
+          onTap: () {
+            Navigator.of(context).pop();
+          },
           child: Text(
             HomePageUiStrings.stayEditSteppPage,
             style: context.textTheme.bodySmall!.copyWith(color: Colors.white),

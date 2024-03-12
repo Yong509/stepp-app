@@ -15,4 +15,6 @@ class HomePageUiStrings {
   static const stayEditSteppPage = "No, I want to keep edit";
   static const quitEditSteppPage = "Quit";
   static const quitEditSteppDialogTitle = "If you go back now, your post will be discarded.";
+  static const addOrEditDescription = "Add/Edit description";
+  static const addOrEditImage = "Add/Edit image";
 }

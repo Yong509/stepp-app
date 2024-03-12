@@ -8,12 +8,16 @@ class AddSteppPlaceModel {
     this.stepps,
     this.description,
     this.place,
+    this.coverImage,
+    this.people,
   });
 
   final String steppTitle;
   String? description;
   List<EachStepp>? stepps;
   Place? place;
+  AssetEntity? coverImage;
+  List<int>? people;
 }
 
 class EachStepp {

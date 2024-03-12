@@ -35,10 +35,17 @@ class Routes {
       );
     },
     RouteNames.addCoverPage: (context) {
-      return ChangeNotifierProvider(
-        create: (context) => ImageGalleryProvider(
-          Provider.of<ImageGalleryService>(context, listen: false),
-        ),
+      final Map args = ModalRoute.of(context)!.settings.arguments as Map;
+      final AddSteppPlaceProvider addSteppProvider = args[RouteParameters.addSteppProvider];
+      return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => ImageGalleryProvider(
+              Provider.of<ImageGalleryService>(context, listen: false),
+            ),
+          ),
+          ChangeNotifierProvider.value(value: addSteppProvider)
+        ],
         builder: (context, child) {
           return const AddCoverPage();
         },
