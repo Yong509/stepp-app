@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
@@ -106,6 +108,7 @@ class _AddCoverPageState extends State<AddCoverPage> {
               color: Colors.black.withOpacity(AppTheme.opacity85Percent),
             ),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
                   padding: Sizes.allSidePaddingMedium,
@@ -191,10 +194,10 @@ class _AddCoverPageState extends State<AddCoverPage> {
         case AssetType.image:
           _disposeVideoController();
           return ImageThumbnailCover(
-              child: AssetEntityImage(
+            child: AssetEntityImage(
               currentEntity,
-                isOriginal: true,
-                filterQuality: FilterQuality.high,
+              isOriginal: true,
+              filterQuality: FilterQuality.high,
               fit: BoxFit.fitHeight,
             ),
           );
