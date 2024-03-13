@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stepp_app/constants/home/feed/post_box_size.dart';
 import 'package:stepp_app/constants/home/feed/post_box_ui_strings.dart';
-import 'package:stepp_app/constants/place/stepp_place_size.dart';
+import 'package:stepp_app/constants/stepp_place/stepp_place_size.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/custom_button.dart';

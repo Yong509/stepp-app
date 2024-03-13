@@ -4,7 +4,7 @@ import 'package:stepp_app/data_models/stepp_place/add_stepp_place_model.dart';
 import 'package:stepp_app/pages/home/feed/add_cover_stepp_page.dart';
 import 'package:stepp_app/pages/home/feed/add_each_stepp_page.dart';
 import 'package:stepp_app/pages/home/home_page.dart';
-import 'package:stepp_app/pages/place/stepp_place_page.dart';
+import 'package:stepp_app/pages/stepp_place/stepp_place_page.dart';
 import 'package:stepp_app/providers/home/add_stepp_place_provider.dart';
 import 'package:stepp_app/providers/image_gallery_provider.dart';
 import 'package:stepp_app/providers/stepp_place_provider.dart';

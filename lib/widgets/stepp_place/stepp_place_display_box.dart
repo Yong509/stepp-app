@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stepp_app/constants/place/stepp_place_size.dart';
+import 'package:stepp_app/constants/stepp_place/stepp_place_size.dart';
 
 class SteppPlaceDisplayBox extends StatelessWidget {
   final String profileImage;

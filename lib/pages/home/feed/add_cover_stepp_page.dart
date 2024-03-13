@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:stepp_app/constants/home/add/add_cover_stepp_page_sizes.dart';
 import 'package:stepp_app/constants/home/add/add_cover_stepp_page_ui_strings.dart';
-import 'package:stepp_app/constants/place/stepp_place_ui_strings.dart';
+import 'package:stepp_app/constants/stepp_place/stepp_place_ui_strings.dart';
 import 'package:stepp_app/constants/routes.dart';
 import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/providers/home/add_stepp_place_provider.dart';

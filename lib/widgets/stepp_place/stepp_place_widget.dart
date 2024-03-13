@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:stepp_app/constants/place/stepp_place_size.dart';
+import 'package:stepp_app/constants/stepp_place/stepp_place_size.dart';
 import 'package:stepp_app/data_models/stepp_place/stepp_place_model.dart';
 import 'package:stepp_app/providers/stepp_place_provider.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/image_viewer.dart';
-import 'package:stepp_app/widgets/place/sliding_stepp_place_panel.dart';
-import 'package:stepp_app/widgets/place/stepp_place_app_bar.dart';
-import 'package:stepp_app/widgets/place/stepp_place_content.dart';
+import 'package:stepp_app/widgets/stepp_place/sliding_stepp_place_panel.dart';
+import 'package:stepp_app/widgets/stepp_place/stepp_place_app_bar.dart';
+import 'package:stepp_app/widgets/stepp_place/stepp_place_content.dart';
 
 class SteppPlaceWidget extends StatefulWidget {
   const SteppPlaceWidget({super.key});

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:stepp_app/constants/place/stepp_place_size.dart';
-import 'package:stepp_app/constants/place/stepp_place_ui_strings.dart';
+import 'package:stepp_app/constants/stepp_place/stepp_place_size.dart';
+import 'package:stepp_app/constants/stepp_place/stepp_place_ui_strings.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
 import 'package:stepp_app/providers/stepp_place_provider.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/custom_button.dart';
 import 'package:stepp_app/widgets/custom_opacity_tile.dart';
-import 'package:stepp_app/widgets/place/profile_avatar.dart';
-import 'package:stepp_app/widgets/place/stepp_place_panel.dart';
+import 'package:stepp_app/widgets/stepp_place/profile_avatar.dart';
+import 'package:stepp_app/widgets/stepp_place/stepp_place_panel.dart';
 
 class SteppPlaceContent extends StatefulWidget {
   final Function(bool)? isOnTapComment;
