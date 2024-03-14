@@ -3,7 +3,7 @@ import 'dart:math' as math;
 
 class SteppPlaceSize {
   //Stepp place
-  static const steppPlacePagePadding = EdgeInsets.symmetric(horizontal: 4,vertical: 10);
+  static const steppPlacePagePadding = EdgeInsets.symmetric(horizontal: 4, vertical: 10);
   static const steppPlaceTitleTileWidth = 250.0;
   static double steppPlaceShareSpacing(double mediaWidthSize) => mediaWidthSize * 0.1;
   static const steppPlaceSaveIconButtonSize = 15.0;
@@ -13,7 +13,7 @@ class SteppPlaceSize {
   static const steppPlaceContentPadding = EdgeInsets.symmetric(horizontal: 8);
   static const steppPlaceTileDescriptionSpace = 10.0;
   static const steppPlaceContentProfileRadius = 24.0;
-  static const steppPlaceFollowButtonPadding = EdgeInsets.symmetric(vertical: 7,horizontal: 13);
+  static const steppPlaceFollowButtonPadding = EdgeInsets.symmetric(vertical: 7, horizontal: 13);
   static const steppPlaceLikeIconSize = 40.0;
   static const steppPlacePanelSteppButtonIconSize = 16.0;
   static const steppPlaceDescriptionMaxLines = 2;
@@ -39,7 +39,7 @@ class SteppPlaceSize {
   static double sendButtonRotateDegree() => -math.pi / 4;
 
   //Stepp Place Sliding Up Panel
-  static double steppPlaceSlidingPanelMaxHeight(double mediaWidthSize) => mediaWidthSize * 0.5;
+  static double steppPlaceSlidingPanelMaxHeight(double mediaWidthSize) => mediaWidthSize * 0.7;
   static double steppPlaceSlidingPanelMinHeight = 0.0;
   static double steppPlaceSlidingPanelBorderRadius = 20.0;
   static double steppPlaceSlidingPanelHalfHeight = 0.5;

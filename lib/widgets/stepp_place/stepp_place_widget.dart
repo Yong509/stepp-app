@@ -16,8 +16,7 @@ class SteppPlaceWidget extends StatefulWidget {
   State<SteppPlaceWidget> createState() => _SteppPlaceWidgetState();
 }
 
-class _SteppPlaceWidgetState extends State<SteppPlaceWidget>
-    with SingleTickerProviderStateMixin {
+class _SteppPlaceWidgetState extends State<SteppPlaceWidget> with SingleTickerProviderStateMixin {
   late List<SteppPlaceModel> mockData;
   int currentPage = 0;
   late PageController pageController;
@@ -86,8 +85,7 @@ class _SteppPlaceWidgetState extends State<SteppPlaceWidget>
 
   void onImageTapDown(TapDownDetails details) {
     double tapPosition = details.globalPosition.dx;
-    if (tapPosition >
-        SteppPlaceSize.divideHalfScreen(context.deviceSize.width)) {
+    if (tapPosition > SteppPlaceSize.divideHalfScreen(context.deviceSize.width)) {
       pageController.nextPage(
         duration: const Duration(
           milliseconds: SteppPlaceSize.durationPageTransition,
@@ -141,10 +139,8 @@ class _SteppPlaceWidgetState extends State<SteppPlaceWidget>
                             isOnTapComment: (isTap) {
                               if (isTap) {
                                 steppPlaceProvider.setIsPanelOpen(isTap);
-                                steppPlaceProvider.slidingPanelController
-                                    .animatePanelToPosition(
-                                  SteppPlaceSize
-                                      .steppPlaceSlidingPanelHalfHeight,
+                                steppPlaceProvider.slidingPanelController.animatePanelToPosition(
+                                  SteppPlaceSize.steppPlaceSlidingPanelHalfHeight,
                                 );
                               }
                             },

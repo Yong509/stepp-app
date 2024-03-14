@@ -9,9 +9,7 @@ part of 'stepp_place_feed_response.dart';
 SteppPlaceFeedResponse _$SteppPlaceFeedResponseFromJson(
         Map<String, dynamic> json) =>
     SteppPlaceFeedResponse(
-      feed: (json['data'] as List<dynamic>)
-          .map((e) => Feed.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      feed: Feed.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SteppPlaceFeedResponseToJson(

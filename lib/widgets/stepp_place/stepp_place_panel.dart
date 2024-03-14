@@ -22,9 +22,8 @@ class _SteppPlacePanelState extends State<SteppPlacePanel> {
     return SizedBox(
       width: SteppPlaceSize.displayBoxWidth,
       child: Column(
-        mainAxisAlignment: context.watch<SteppPlaceProvider>().isPanelOpen
-            ? MainAxisAlignment.start
-            : MainAxisAlignment.end,
+        mainAxisAlignment:
+            context.watch<SteppPlaceProvider>().isPanelOpen ? MainAxisAlignment.start : MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Flexible(
@@ -41,8 +40,7 @@ class _SteppPlacePanelState extends State<SteppPlacePanel> {
                 ),
                 Text(
                   SteppPlaceUIStrings.steppPlaceMockLiked,
-                  style: context.textTheme.bodyMedium!.copyWith(
-                      color: Colors.white, fontWeight: FontWeight.bold),
+                  style: context.textTheme.bodyMedium!.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
                 )
               ],
             ),
@@ -91,8 +89,7 @@ class _SteppPlacePanelState extends State<SteppPlacePanel> {
                   ),
                   Text(
                     UiStrings.commonStepp,
-                    style: context.textTheme.bodySmall!.copyWith(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                    style: context.textTheme.bodySmall!.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
                   )
                 ],
               ),

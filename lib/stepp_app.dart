@@ -24,7 +24,11 @@ class _SteppAppState extends State<SteppApp> {
       Provider<HttpClientService>.value(value: httpClientService),
       Provider<ImageGalleryService>.value(value: ImageGalleryService()),
       Provider<SteppPlaceService>(create: (context) => SteppPlaceService(httpClientService)),
-      ChangeNotifierProvider(create: (context) => HomeProvider()),
+      ChangeNotifierProvider(
+        create: (context) => HomeProvider(
+          Provider.of<SteppPlaceService>(context, listen: false),
+        ),
+      ),
     ];
   }
 

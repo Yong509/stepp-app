@@ -5,7 +5,7 @@ part 'stepp_place_feed_response.g.dart';
 @JsonSerializable()
 class SteppPlaceFeedResponse {
   @JsonKey(name: "data")
-  final List<Feed> feed;
+  final Feed feed;
 
   SteppPlaceFeedResponse({
     required this.feed,

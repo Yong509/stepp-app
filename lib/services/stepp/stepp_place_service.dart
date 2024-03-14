@@ -12,14 +12,17 @@ class SteppPlaceService {
   final HttpClientService httpClientService;
 
   Future<SteppPlaceFeedResponse?> getSteppPlaceFeed() async {
-    final url = Uri.https(
-      AppConfigs.baseURL,
-      SteppPlaceEndpoint.steppPlaceFeedEndpoint(),
-    );
+    try {
+      final url = Uri.parse(
+        AppConfigs.baseURL + SteppPlaceEndpoint.steppPlaceFeedEndpoint(),
+      );
 
-    final response = await httpClientService.get(url);
-    return response.statusCode == HttpConstants.statusOk
-        ? SteppPlaceFeedResponse.fromJson(jsonDecode(response.body))
-        : null;
+      final response = await httpClientService.get(url);
+      return response.statusCode == HttpConstants.statusOk
+          ? SteppPlaceFeedResponse.fromJson(jsonDecode(response.body))
+          : null;
+    } catch (e) {
+      rethrow;
+    }
   }
 }
