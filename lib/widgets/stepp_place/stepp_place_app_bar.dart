@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stepp_app/constants/place/stepp_place_size.dart';
-import 'package:stepp_app/constants/place/stepp_place_ui_strings.dart';
+import 'package:stepp_app/constants/stepp_place/stepp_place_size.dart';
+import 'package:stepp_app/constants/stepp_place/stepp_place_ui_strings.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
 import 'package:stepp_app/styles/app_theme.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';

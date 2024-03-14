@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:stepp_app/constants/place/stepp_place_size.dart';
+import 'package:stepp_app/constants/stepp_place/stepp_place_size.dart';
 import 'package:stepp_app/data_models/stepp_place/stepp_place_model.dart';
 import 'package:stepp_app/providers/stepp_place_provider.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/image_viewer.dart';
-import 'package:stepp_app/widgets/place/sliding_stepp_place_panel.dart';
-import 'package:stepp_app/widgets/place/stepp_place_app_bar.dart';
-import 'package:stepp_app/widgets/place/stepp_place_content.dart';
+import 'package:stepp_app/widgets/stepp_place/sliding_stepp_place_panel.dart';
+import 'package:stepp_app/widgets/stepp_place/stepp_place_app_bar.dart';
+import 'package:stepp_app/widgets/stepp_place/stepp_place_content.dart';
 
 class SteppPlaceWidget extends StatefulWidget {
   const SteppPlaceWidget({super.key});
@@ -16,8 +16,7 @@ class SteppPlaceWidget extends StatefulWidget {
   State<SteppPlaceWidget> createState() => _SteppPlaceWidgetState();
 }
 
-class _SteppPlaceWidgetState extends State<SteppPlaceWidget>
-    with SingleTickerProviderStateMixin {
+class _SteppPlaceWidgetState extends State<SteppPlaceWidget> with SingleTickerProviderStateMixin {
   late List<SteppPlaceModel> mockData;
   int currentPage = 0;
   late PageController pageController;
@@ -86,8 +85,7 @@ class _SteppPlaceWidgetState extends State<SteppPlaceWidget>
 
   void onImageTapDown(TapDownDetails details) {
     double tapPosition = details.globalPosition.dx;
-    if (tapPosition >
-        SteppPlaceSize.divideHalfScreen(context.deviceSize.width)) {
+    if (tapPosition > SteppPlaceSize.divideHalfScreen(context.deviceSize.width)) {
       pageController.nextPage(
         duration: const Duration(
           milliseconds: SteppPlaceSize.durationPageTransition,
@@ -141,10 +139,8 @@ class _SteppPlaceWidgetState extends State<SteppPlaceWidget>
                             isOnTapComment: (isTap) {
                               if (isTap) {
                                 steppPlaceProvider.setIsPanelOpen(isTap);
-                                steppPlaceProvider.slidingPanelController
-                                    .animatePanelToPosition(
-                                  SteppPlaceSize
-                                      .steppPlaceSlidingPanelHalfHeight,
+                                steppPlaceProvider.slidingPanelController.animatePanelToPosition(
+                                  SteppPlaceSize.steppPlaceSlidingPanelHalfHeight,
                                 );
                               }
                             },

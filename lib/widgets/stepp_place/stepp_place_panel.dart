@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:stepp_app/constants/place/stepp_place_size.dart';
-import 'package:stepp_app/constants/place/stepp_place_ui_strings.dart';
+import 'package:stepp_app/constants/stepp_place/stepp_place_size.dart';
+import 'package:stepp_app/constants/stepp_place/stepp_place_ui_strings.dart';
 import 'package:stepp_app/constants/sizes.dart';
 import 'package:stepp_app/constants/ui_strings.dart';
 import 'package:stepp_app/providers/stepp_place_provider.dart';
 import 'package:stepp_app/utils/build_context_helper.dart';
 import 'package:stepp_app/widgets/custom_button.dart';
-import 'package:stepp_app/widgets/place/stepp_place_display_box.dart';
+import 'package:stepp_app/widgets/stepp_place/stepp_place_display_box.dart';
 
 class SteppPlacePanel extends StatefulWidget {
   const SteppPlacePanel({super.key});
@@ -22,9 +22,8 @@ class _SteppPlacePanelState extends State<SteppPlacePanel> {
     return SizedBox(
       width: SteppPlaceSize.displayBoxWidth,
       child: Column(
-        mainAxisAlignment: context.watch<SteppPlaceProvider>().isPanelOpen
-            ? MainAxisAlignment.start
-            : MainAxisAlignment.end,
+        mainAxisAlignment:
+            context.watch<SteppPlaceProvider>().isPanelOpen ? MainAxisAlignment.start : MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Flexible(
@@ -41,8 +40,7 @@ class _SteppPlacePanelState extends State<SteppPlacePanel> {
                 ),
                 Text(
                   SteppPlaceUIStrings.steppPlaceMockLiked,
-                  style: context.textTheme.bodyMedium!.copyWith(
-                      color: Colors.white, fontWeight: FontWeight.bold),
+                  style: context.textTheme.bodyMedium!.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
                 )
               ],
             ),
@@ -91,8 +89,7 @@ class _SteppPlacePanelState extends State<SteppPlacePanel> {
                   ),
                   Text(
                     UiStrings.commonStepp,
-                    style: context.textTheme.bodySmall!.copyWith(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                    style: context.textTheme.bodySmall!.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
                   )
                 ],
               ),

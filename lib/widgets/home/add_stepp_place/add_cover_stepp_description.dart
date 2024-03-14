@@ -23,41 +23,49 @@ class _AddCoverSteppPlaceDescriptionState extends State<AddCoverSteppPlaceDescri
   Widget build(BuildContext context) {
     return Consumer<AddSteppPlaceProvider>(
       builder: (context, value, child) {
-        return Padding(
-          padding: AddCoverSteppPageSizes.coverDescriptionPadding,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Row(
+        return SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: ConstrainedBox(
+            constraints: BoxConstraints.tightFor(
+              height: context.deviceSize.height,
+            ),
+            child: Padding(
+              padding: AddCoverSteppPageSizes.coverDescriptionPadding,
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    HomePageUiStrings.selectPlacePrompt(
-                      value.currentAddStepp!.place!.placeTitle,
-                    ),
-                    style: context.textTheme.bodySmall!.copyWith(
-                      color: Colors.white.withOpacity(AppTheme.opacity80Percent),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        HomePageUiStrings.selectPlacePrompt(
+                          value.currentAddStepp!.place!.placeTitle,
+                        ),
+                        style: context.textTheme.bodySmall!.copyWith(
+                          color: Colors.white.withOpacity(AppTheme.opacity80Percent),
+                        ),
+                      ),
+                      const SizedBox(width: Sizes.spacing15),
+                      Text(
+                        AddCoverSteppUiStrings.addPeople,
+                        style: context.textTheme.bodySmall!.copyWith(
+                          color: Colors.white.withOpacity(AppTheme.opacity80Percent),
+                        ),
+                      )
+                    ],
+                  ),
+                  Flexible(
+                    child: CustomTextField(
+                      backgroundColor: Colors.transparent,
+                      controller: TextEditingController(),
+                      hintText: HomePageUiStrings.descriptionHintText,
+                      maxLine: HomePageSize.addSteppDescriptionMinLine,
+                      hintTextStyle: context.textTheme.bodySmall,
                     ),
                   ),
-                  const SizedBox(width: Sizes.spacing15),
-                  Text(
-                    AddCoverSteppUiStrings.addPeople,
-                    style: context.textTheme.bodySmall!.copyWith(
-                      color: Colors.white.withOpacity(AppTheme.opacity80Percent),
-                    ),
-                  )
                 ],
               ),
-              Flexible(
-                child: CustomTextField(
-                  backgroundColor: Colors.transparent,
-                  controller: TextEditingController(),
-                  hintText: HomePageUiStrings.descriptionHintText,
-                  maxLine: HomePageSize.addSteppDescriptionMinLine,
-                  hintTextStyle: context.textTheme.bodySmall,
-                ),
-              ),
-            ],
+            ),
           ),
         );
       },

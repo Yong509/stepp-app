@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stepp_app/widgets/place/stepp_place_widget.dart';
+import 'package:stepp_app/widgets/stepp_place/stepp_place_widget.dart';
 
 class SteppPlacePage extends StatefulWidget {
   const SteppPlacePage({super.key});
